@@ -1,12 +1,14 @@
 import { h, JSX, render } from "preact";
 import { useEffect, useRef } from "preact/hooks";
 import Hls from "hls.js";
+import register from "preact-custom-element";
 
 type Props = JSX.HTMLAttributes<HTMLVideoElement>;
 
 const App = (props: Props) => {
   const ref = useRef<HTMLVideoElement>(null);
 
+console.log(props);
   useEffect(() => {
     if (Hls.isSupported() && ref.current != null) {
       const hls = new Hls();
@@ -15,7 +17,24 @@ const App = (props: Props) => {
     }
   }, []);
 
-  return <video ref={ref} {...props} src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"></video>;
+  return <video ref={ref} {...props}></video>
 }
 
-// render(<App/>, document.getElementById('app'));
+register(
+  App,
+  "video-hls",
+  [
+    "src",
+    "autoplay",
+    "controls",
+    "width",
+    "height",
+    "loop",
+    "muted",
+    "poster",
+    "preload",
+    "style",
+    "class",
+  ],
+  { shadow: true },
+);

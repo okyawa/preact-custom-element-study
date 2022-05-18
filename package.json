@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "watch": "webpack --watch"
   },
   "dependencies": {
     "hls.js": "^1.1.5",
