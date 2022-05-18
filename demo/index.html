@@ -8,10 +8,41 @@
     <meta name="robots" content="noindex">
   </head>
   <body>
+
     <h1>Preactで作ったコンポーネントをCustom Elementsとして使うサンプル</h1>
 
+    <form>
+      <fieldset>
+        <legend>Custom Elements外</legend>
+        <label for="ja_name">名前: </label><input type="text" value="" name="ja_name" id="ja_name" />
+      </fieldset>
+      <fieldset>
+        <legend>Custom Elements内</legend>
+        <name-field name="en_name" message=""></name-field>
+      </fieldset>
+      <dl>
+        <dt>Custom Elements外からCustom Elements内の値を取得したもの</dt>
+        <dd></dd>
+      </dl>
+    </form>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', (e) => {
+        const jaNameElem = document.getElementById('ja_name');
+        jaNameElem.addEventListener('input', (event) => {
+          const nameFieldElem = document.querySelector('name-field');
+          if (nameFieldElem === undefined) {
+            return;
+          }
+          nameFieldElem.setAttribute('message', event.target.value);
+        });
+      });
+    </script>
+
     <hr />
+
     <h2>"<code>video-hls</code>"のCustom Elements</h2>
     <video-hls src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"></video-hls>
+
   </body>
 </html>
