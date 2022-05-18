@@ -1,40 +1,6 @@
-import { h, JSX, render } from "preact";
-import { useEffect, useRef } from "preact/hooks";
-import Hls from "hls.js";
-import register from "preact-custom-element";
+import { VideoHls } from "./components/video-hls/video-hls";
 
-type Props = JSX.HTMLAttributes<HTMLVideoElement>;
-
-const App = (props: Props) => {
-  const ref = useRef<HTMLVideoElement>(null);
-
-console.log(props);
-  useEffect(() => {
-    if (Hls.isSupported() && ref.current != null) {
-      const hls = new Hls();
-      hls.loadSource(props.src || "");
-      hls.attachMedia(ref.current);
-    }
-  }, []);
-
-  return <video ref={ref} {...props}></video>
-}
-
-register(
-  App,
-  "video-hls",
-  [
-    "src",
-    "autoplay",
-    "controls",
-    "width",
-    "height",
-    "loop",
-    "muted",
-    "poster",
-    "preload",
-    "style",
-    "class",
-  ],
-  { shadow: true },
-);
+// Webpackで読み込んでビルドされるよう、外部設置のコンポーネントを呼び出し
+[
+  VideoHls,
+];
