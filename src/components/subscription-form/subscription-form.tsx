@@ -127,7 +127,7 @@ export const SubscriptionForm = (props: Props) => {
           <label for="monthly_cycle">月ごと</label>
         </div>
         {
-          deliveryCycleValue === deliveryCycleCase.monthly && (
+          deliveryCycleValue === 'monthly' && (
             <div>
               <select onChange={handleDeliveryMonthlyCycle} value={deliveryMonthlyCycleValue}>
                 {
@@ -157,7 +157,7 @@ export const SubscriptionForm = (props: Props) => {
           <label for="weekly_cycle">週ごと</label>
         </div>
         {
-          deliveryCycleValue === deliveryCycleCase.weekly && (
+          deliveryCycleValue === 'weekly' && (
             <div>
               <select onChange={handleDeliveryWeeklyCycleValue} value={deliveryWeeklyCycleValue}>
                 {
