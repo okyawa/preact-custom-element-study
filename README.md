@@ -8,3 +8,8 @@
 ## name-field
 
 - Custom Elementsの入出力検証
+
+
+## 参照
+
+- [Webコンポーネントを作成する - PREACT](https://preactjs.com/guide/v10/web-components/#creating-a-web-component)
