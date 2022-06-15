@@ -5,10 +5,13 @@ const isProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
   mode: isProduction ? "production" : "development",
-  entry: "./src/index.tsx",
+  entry: {
+    'video-hls': './src/index.tsx',
+    'product-fom': './src/product-fom.tsx',
+  },
   output: {
     path: path.resolve(__dirname, "./dist"),
-    filename: "video-hls.js",
+    filename: "[name].js",
   },
   module: {
     rules: [
