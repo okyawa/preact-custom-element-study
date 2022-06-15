@@ -1,10 +1,6 @@
-import { h } from "preact";
+import { h, JSX } from "preact";
 import register from "preact-custom-element";
-import { useState } from "preact/hooks";
-
-type Props = {
-
-};
+import { useEffect, useState } from "preact/hooks";
 
 const firstShipment: {[key: string]: string} = {
   earliest: '最短',  
@@ -51,75 +47,120 @@ const deliveryDayOfWeek: {[key: string]: string} = {
   saturday: '土曜日',
 };
 
+type Props = {
+
+};
+
 export const SubscriptionForm = (props: Props) => {
 
   const [firstShipmentValue, setFirstShipmentValue] = useState('');
   const [deliveryCycleValue, setDeliveryCycleValue] = useState('');
-  const [deliveryMonthlyCycleValue, setDeliveryMonthlyCycleValue] = useState('');
-  const [deliveryDayValue, setDeliveryDayValue] = useState('');
-  const [deliveryWeeklyCycleValue, setDeliveryWeeklyCycle] = useState('');
-  const [deliveryDayOfWeekValue, setDeliveryDayOfWeekValue] = useState('');
+  const [deliveryMonthlyCycleValue, setDeliveryMonthlyCycleValue] = useState('month1');
+  const [deliveryDayValue, setDeliveryDayValue] = useState('day1');
+  const [deliveryWeeklyCycleValue, setDeliveryWeeklyCycle] = useState('week1');
+  const [deliveryDayOfWeekValue, setDeliveryDayOfWeekValue] = useState('monday');
 
-  const handleFirstShipment = (e: Event) => setFirstShipmentValue('');
+  const handleFirstShipment = (e: JSX.TargetedEvent<HTMLInputElement, Event>) => setFirstShipmentValue(e.currentTarget.value);
+  const handleDeliveryCycle = (e: JSX.TargetedEvent<HTMLInputElement, Event>) => setDeliveryCycleValue(e.currentTarget.value);
+  const handleDeliveryMonthlyCycle = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => setDeliveryMonthlyCycleValue(e.currentTarget.value);
+  const handleDeliveryDayValue = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => setDeliveryDayValue(e.currentTarget.value);
+  const handleDeliveryWeeklyCycleValue = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => setDeliveryWeeklyCycle(e.currentTarget.value);
+  const handleDeliveryDayOfWeekValue = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => setDeliveryDayOfWeekValue(e.currentTarget.value);
 
+  useEffect(() => {
+
+  }, [
+    firstShipmentValue,
+    deliveryCycleValue,
+    deliveryMonthlyCycleValue,
+    deliveryDayValue,
+    deliveryWeeklyCycleValue,
+    deliveryDayOfWeekValue,
+  ]);
   return <div>
-    <h3>最初の発送</h3>
-    <div>
-      <input
-        type="radio"
-        name="first_shipment"
-        id="first_shipment_earliest"
-        value={firstShipment.earliest}
-        onChange={handleFirstShipment} />
-      <label for="first_shipment_earliest">最短</label>
-      <input type="radio"
-        name="first_shipment"
-        id="first_shipment_cycle"
-        value={firstShipment.cycle}
-        onChange={handleFirstShipment} />
-      <label for="first_shipment_cycle">お届けサイクル通り</label>
-    </div>
-    <h3>お届けサイクル</h3>
-    <div>
+    <fieldset>
+      <legend>最初の発送</legend>
       <div>
-        <input type="radio" name="delivery_cycle" value={deliveryCycleCase.monthly} id="monthly_cycle" />
-        <label for="monthly_cycle">月ごと</label>
+        <input
+          type="radio"
+          name="first_shipment"
+          id="first_shipment_earliest"
+          value={firstShipment.earliest}
+          checked={firstShipmentValue === firstShipment.earliest}
+          onChange={handleFirstShipment} />
+        <label for="first_shipment_earliest">最短</label>
+        <input type="radio"
+          name="first_shipment"
+          id="first_shipment_cycle"
+          value={firstShipment.cycle}
+          checked={firstShipmentValue === firstShipment.cycle}
+          onChange={handleFirstShipment} />
+        <label for="first_shipment_cycle">お届けサイクル通り</label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>お届けサイクル</legend>
+      <div>
+        <div>
+          <input
+            type="radio"
+            name="delivery_cycle"
+            id="monthly_cycle"
+            value={deliveryCycleCase.monthly}
+            checked={deliveryCycleValue === deliveryCycleCase.monthly}
+            onChange={handleDeliveryCycle} />
+          <label for="monthly_cycle">月ごと</label>
+        </div>
+        {
+          deliveryCycleValue === deliveryCycleCase.monthly && (
+            <div>
+              <select onChange={handleDeliveryMonthlyCycle} value={deliveryMonthlyCycleValue}>
+                {
+                  Object.keys(deliveryMonthlyCycle)
+                    .map((name) => <option value={name}>{deliveryMonthlyCycle[name]}</option>)
+                }
+              </select>
+              <select onChange={handleDeliveryDayValue} value={deliveryDayValue}>
+                {
+                  Object.keys(deliveryDays)
+                    .map((name) => <option value={name}>{deliveryDays[name]}</option>)
+                }
+              </select>
+            </div>
+          )
+        }
       </div>
       <div>
-        <select>
-          {
-            Object.keys(deliveryMonthlyCycle)
-              .map((name) => <option value={name}>{deliveryMonthlyCycle[name]}</option>)
-          }
-        </select>
-        <select>
-          {
-            Object.keys(deliveryDays)
-              .map((name) => <option value={name}>{deliveryDays[name]}</option>)
-          }
-        </select>
+        <div>
+          <input
+            type="radio"
+            name="delivery_cycle"
+            id="weekly_cycle"
+            value={deliveryCycleCase.weekly}
+            checked={deliveryCycleValue === deliveryCycleCase.weekly}
+            onChange={handleDeliveryCycle} />
+          <label for="weekly_cycle">週ごと</label>
+        </div>
+        {
+          deliveryCycleValue === deliveryCycleCase.weekly && (
+            <div>
+              <select onChange={handleDeliveryWeeklyCycleValue} value={deliveryWeeklyCycleValue}>
+                {
+                  Object.keys(deliveryWeeklyCycle)
+                    .map((name) => <option value={name}>{deliveryWeeklyCycle[name]}</option>)
+                }
+              </select>
+              <select onChange={handleDeliveryDayOfWeekValue} value={deliveryDayOfWeekValue}>
+                {
+                  Object.keys(deliveryDayOfWeek)
+                    .map((name) => <option value={name}>{deliveryDayOfWeek[name]}</option>)
+                }
+              </select>
+            </div>
+          )
+        }
       </div>
-    </div>
-    <div>
-      <div>
-        <input type="radio" name="delivery_cycle" value={deliveryCycleCase.weekly} id="weekly_cycle" />
-        <label for="weekly_cycle">週ごと</label>
-      </div>
-      <div>
-        <select>
-          {
-            Object.keys(deliveryWeeklyCycle)
-              .map((name) => <option value={name}>{deliveryWeeklyCycle[name]}</option>)
-          }
-        </select>
-        <select>
-          {
-            Object.keys(deliveryDayOfWeek)
-              .map((name) => <option value={name}>{deliveryDayOfWeek[name]}</option>)
-          }
-        </select>
-      </div>
-    </div>
+    </fieldset>
 
   </div>;
 }
