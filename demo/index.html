@@ -15,6 +15,30 @@
 
     <subscription-form></subscription-form>
 
+    <div>
+      <h3>Custom Elementsのフォーム外</h3>
+      <h4>入力値</h4>
+      <code id="form_value_debug"></code>
+    </div>
+
+    <script>
+      /**
+       * Custom Elements内からのイベントを受け取り
+       * 
+       * Custom Elements自体にはイベントを付与できないため、
+       * Shadow DOMをOFFにした状態で、Custom Elements内の要素にカスタムイベントを付与し、
+       * カスタムイベントを付与した要素のdata属性にJSON.stringifyしたデータを格納し、
+       * こちら側で受け取り
+       */
+      const subscriptionFormElem = document.querySelector('subscription-form');
+      subscriptionFormElem.addEventListener('modified', (event) => {
+        if (event.target.classList.contains('subscription_form')) {
+          console.log(JSON.parse(event.target.dataset.formData));
+          document.querySelector('#form_value_debug').textContent = event.target.dataset.formData;
+        }
+      }, true);
+    </script>
+
     <br />
     <hr />
     <br />

@@ -1,6 +1,6 @@
 import { h, JSX } from "preact";
 import register from "preact-custom-element";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 
 const firstShipment: {[key: string]: string} = {
   earliest: '最短',  
@@ -53,6 +53,9 @@ type Props = {
 
 export const SubscriptionForm = (props: Props) => {
 
+  // Webコンポーネントのインスタンスにアクセス
+  const myRef = useRef<HTMLDivElement>(null);
+
   const [firstShipmentValue, setFirstShipmentValue] = useState('');
   const [deliveryCycleValue, setDeliveryCycleValue] = useState('');
   const [deliveryMonthlyCycleValue, setDeliveryMonthlyCycleValue] = useState('month1');
@@ -68,7 +71,19 @@ export const SubscriptionForm = (props: Props) => {
   const handleDeliveryDayOfWeekValue = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => setDeliveryDayOfWeekValue(e.currentTarget.value);
 
   useEffect(() => {
-
+    if (myRef.current) {
+      const data = {
+        firstShipmentValue,
+        deliveryCycleValue,
+        deliveryMonthlyCycleValue,
+        deliveryDayValue,
+        deliveryWeeklyCycleValue,
+        deliveryDayOfWeekValue,
+      };
+      myRef.current.dataset.formData = JSON.stringify(data);
+      const triggerEvent = new Event('modified')
+      myRef.current.dispatchEvent(triggerEvent);
+    }
   }, [
     firstShipmentValue,
     deliveryCycleValue,
@@ -77,7 +92,7 @@ export const SubscriptionForm = (props: Props) => {
     deliveryWeeklyCycleValue,
     deliveryDayOfWeekValue,
   ]);
-  return <div>
+  return <div class="subscription_form" ref={myRef}>
     <fieldset>
       <legend>最初の発送</legend>
       <div>
@@ -85,15 +100,15 @@ export const SubscriptionForm = (props: Props) => {
           type="radio"
           name="first_shipment"
           id="first_shipment_earliest"
-          value={firstShipment.earliest}
-          checked={firstShipmentValue === firstShipment.earliest}
+          value="earliest"
+          checked={firstShipmentValue === 'earliest'}
           onChange={handleFirstShipment} />
         <label for="first_shipment_earliest">最短</label>
         <input type="radio"
           name="first_shipment"
           id="first_shipment_cycle"
-          value={firstShipment.cycle}
-          checked={firstShipmentValue === firstShipment.cycle}
+          value="cycle"
+          checked={firstShipmentValue === 'cycle'}
           onChange={handleFirstShipment} />
         <label for="first_shipment_cycle">お届けサイクル通り</label>
       </div>
@@ -106,8 +121,8 @@ export const SubscriptionForm = (props: Props) => {
             type="radio"
             name="delivery_cycle"
             id="monthly_cycle"
-            value={deliveryCycleCase.monthly}
-            checked={deliveryCycleValue === deliveryCycleCase.monthly}
+            value="monthly"
+            checked={deliveryCycleValue === 'monthly'}
             onChange={handleDeliveryCycle} />
           <label for="monthly_cycle">月ごと</label>
         </div>
@@ -136,8 +151,8 @@ export const SubscriptionForm = (props: Props) => {
             type="radio"
             name="delivery_cycle"
             id="weekly_cycle"
-            value={deliveryCycleCase.weekly}
-            checked={deliveryCycleValue === deliveryCycleCase.weekly}
+            value="weekly"
+            checked={deliveryCycleValue === 'weekly'}
             onChange={handleDeliveryCycle} />
           <label for="weekly_cycle">週ごと</label>
         </div>
@@ -171,5 +186,5 @@ register(
   [
 
   ],
-  { shadow: true }
+  { shadow: false }
 );
