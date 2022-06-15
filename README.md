@@ -9,6 +9,9 @@
 
 - Custom Elementsの入出力検証
 
+## subscription-form
+
+- Custom Elementsからの出力検証
 
 ## 参照
 
