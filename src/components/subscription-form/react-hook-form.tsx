@@ -1,4 +1,4 @@
-import { Fragment, h, JSX, options } from "preact";
+import { Fragment, h } from "preact";
 import register from "preact-custom-element";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { deliveryDayOfWeek, deliveryDays, deliveryMonthlyCycle, deliveryWeeklyCycle } from "./value-const";
@@ -11,6 +11,11 @@ interface SubscriptionFormInput {
   delivery_weekly_cycle: string;
   delivery_day_of_week: string;
 }
+
+const initialValues = {
+  first_name: '',
+  delivery_day_of_week: 'monday',
+};
 
 type Props = {
 
@@ -26,8 +31,12 @@ export const ReactHookForm = () => {
     <h2>React Hook Formを使った検証</h2>
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <input {...register('first_name', { required: true, maxLength: 20 })} />
-        {errors.first_name && <span>名前を入力してください</span>}
+        <input
+          defaultValue={initialValues.first_name}
+          placeholder="お名前"
+          {...register('first_name', { required: true, maxLength: 20 })}
+        />
+        {errors.first_name && <span>お名前を入力してください</span>}
       </div>
       <fieldset>
         <legend>お届けサイクル</legend>
@@ -56,7 +65,10 @@ export const ReactHookForm = () => {
                 .map((name) => <option value={name}>{deliveryWeeklyCycle[name]}</option>)
             }
           </select>
-          <select {...register('delivery_day_of_week', { required: true })}>
+          <select
+            defaultValue={initialValues.delivery_day_of_week}
+            {...register('delivery_day_of_week', { required: true })}
+          >
             {
               Object.keys(deliveryDayOfWeek)
                 .map((name) => <option value={name}>{deliveryDayOfWeek[name]}</option>)
