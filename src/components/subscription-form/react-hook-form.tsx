@@ -22,7 +22,11 @@ type Props = {
 };
 
 export const ReactHookForm = () => {
-  const { register, formState: { errors }, handleSubmit } = useForm<SubscriptionFormInput>();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<SubscriptionFormInput>({ defaultValues: initialValues });
   const onSubmit: SubmitHandler<SubscriptionFormInput> = (data) => {
     console.log(data);
   };
@@ -32,7 +36,6 @@ export const ReactHookForm = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <input
-          defaultValue={initialValues.first_name}
           placeholder="お名前"
           {...register('first_name', { required: true, maxLength: 20 })}
         />
@@ -66,7 +69,6 @@ export const ReactHookForm = () => {
             }
           </select>
           <select
-            defaultValue={initialValues.delivery_day_of_week}
             {...register('delivery_day_of_week', { required: true })}
           >
             {
