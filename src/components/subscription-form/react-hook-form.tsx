@@ -33,6 +33,9 @@ type Props = {
 };
 
 export const ReactHookForm = () => {
+  // TODO: コンポーネントに分けて、useWatchを使う形式にする
+  // https://react-hook-form.com/get-started#Integratinganexistingform
+  // https://react-hook-form.com/api/usewatch
   const {
     register,
     watch,
