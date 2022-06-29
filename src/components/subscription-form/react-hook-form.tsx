@@ -1,6 +1,6 @@
 import { Fragment, h } from "preact";
 import register from "preact-custom-element";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { deliveryDayOfWeek, deliveryDays, deliveryMonthlyCycle, deliveryWeeklyCycle } from "./value-const";
 
 interface SubscriptionFormInput {
@@ -17,6 +17,52 @@ const initialValues = {
   delivery_day_of_week: 'monday',
 };
 
+const registerOptions = {
+  firstName: {
+    required: 'お名前を入力してください',
+    maxLength: {
+      value: 20,
+      message: '20文字まで入力できます',
+    },
+  },
+  // deliveryMonthlyCycle: {},
+};
+
+//↓上手くいかず。。
+// const resolver: Resolver<SubscriptionFormInput> = async (values) => {
+//   return {
+//     values: values.first_name ? values : {},
+//     errors: !values.first_name
+//       ? {
+//           firstName: {
+//             type: 'required',
+//             message: 'This is required.',
+//           },
+//           // delivery_cycle: {
+//           //   type: 'required',
+//           //   message: 'This is required.',
+//           // },
+//           // delivery_monthly_cycle: {
+//           //   type: 'required',
+//           //   message: 'This is required.',
+//           // },
+//           // delivery_days: {
+//           //   type: 'required',
+//           //   message: 'This is required.',
+//           // },
+//           // delivery_weekly_cycle: {
+//           //   type: 'required',
+//           //   message: 'This is required.',
+//           // },
+//           // delivery_day_of_week: {
+//           //   type: 'required',
+//           //   message: 'This is required.',
+//           // },
+//         }
+//       : {},
+//   };
+// };
+
 type Props = {
 
 };
@@ -25,9 +71,15 @@ export const ReactHookForm = () => {
   const {
     register,
     watch,
+    // getValues,
     formState: { errors },
     handleSubmit,
-  } = useForm<SubscriptionFormInput>({ defaultValues: initialValues });
+  } = useForm<SubscriptionFormInput>({
+    // resolver,
+    defaultValues: initialValues,
+    mode: "onChange",
+    reValidateMode: "onBlur",
+  });
 
   const onSubmit: SubmitHandler<SubscriptionFormInput> = (data) => {
     console.log(data);
@@ -35,14 +87,17 @@ export const ReactHookForm = () => {
 
   const checkedDeliveryCycle = watch('delivery_cycle');
 
+  // console.log(errors?.first_name && errors.first_name.message);
+
   return <>
     <h2>React Hook Formを使った検証</h2>
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <input
           placeholder="お名前"
-          {...register('first_name', { required: true, maxLength: 20 })}
+          {...register('first_name', registerOptions.firstName)}
         />
+        {/* {errors?.first_name && errors.first_name.message } */}
         {errors.first_name && <span>お名前を入力してください</span>}
       </div>
       <fieldset>
