@@ -26,7 +26,6 @@ const registerOptions = {
       message: '20文字まで入力できます',
     },
   },
-  // deliveryMonthlyCycle: {},
 };
 
 type Props = {
@@ -37,10 +36,10 @@ export const ReactHookForm = () => {
   const {
     register,
     watch,
-    // getValues,
+    getValues,
     setError,
     clearErrors,
-    formState: { errors },
+    formState: { errors, isValid, isDirty, isSubmitted },
     handleSubmit,
   } = useForm<SubscriptionFormInput>({
     defaultValues: initialValues,
@@ -66,6 +65,9 @@ export const ReactHookForm = () => {
   return <>
     <h2>React Hook Formを使った検証</h2>
     <form onSubmit={handleSubmit(onSubmit)}>
+      {
+        isDirty && !isValid && isSubmitted && <div>入力内容をご確認ください</div>
+      }
       <div>
         <input
           placeholder="お名前"
@@ -101,12 +103,24 @@ export const ReactHookForm = () => {
         {
           checkedDeliveryCycle === 'weekly' && (
             <div>
-              <select {...register('delivery_weekly_cycle', { required: true })}>
+              <select {
+                ...register('delivery_weekly_cycle', {
+                  required: true,
+                  validate: (value) => {
+                    const checkedDeliveryCycle = getValues('delivery_cycle');
+                    if (checkedDeliveryCycle !== 'weekly') {
+                      return true;
+                    }
+                    return value !== '';
+                  }
+                })
+              }>
                 {
                   Object.keys(deliveryWeeklyCycle)
                     .map((name) => <option value={name}>{deliveryWeeklyCycle[name]}</option>)
                 }
               </select>
+              {errors.delivery_weekly_cycle && '選択してください'}
               <select
                 {...register('delivery_day_of_week', { required: true })}
               >

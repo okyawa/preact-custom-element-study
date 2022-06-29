@@ -29,6 +29,7 @@ export const deliveryDays: {[key: string]: string} = {
 };
 
 export const deliveryWeeklyCycle: {[key: string]: string} = {
+  '': '---',
   // week1: '1週毎',
   week2: '2週毎',
   week3: '3週毎',
