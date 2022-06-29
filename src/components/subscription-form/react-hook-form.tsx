@@ -28,41 +28,6 @@ const registerOptions = {
   // deliveryMonthlyCycle: {},
 };
 
-//↓上手くいかず。。
-// const resolver: Resolver<SubscriptionFormInput> = async (values) => {
-//   return {
-//     values: values.first_name ? values : {},
-//     errors: !values.first_name
-//       ? {
-//           firstName: {
-//             type: 'required',
-//             message: 'This is required.',
-//           },
-//           // delivery_cycle: {
-//           //   type: 'required',
-//           //   message: 'This is required.',
-//           // },
-//           // delivery_monthly_cycle: {
-//           //   type: 'required',
-//           //   message: 'This is required.',
-//           // },
-//           // delivery_days: {
-//           //   type: 'required',
-//           //   message: 'This is required.',
-//           // },
-//           // delivery_weekly_cycle: {
-//           //   type: 'required',
-//           //   message: 'This is required.',
-//           // },
-//           // delivery_day_of_week: {
-//           //   type: 'required',
-//           //   message: 'This is required.',
-//           // },
-//         }
-//       : {},
-//   };
-// };
-
 type Props = {
 
 };
@@ -75,7 +40,6 @@ export const ReactHookForm = () => {
     formState: { errors },
     handleSubmit,
   } = useForm<SubscriptionFormInput>({
-    // resolver,
     defaultValues: initialValues,
     mode: "onChange",
     reValidateMode: "onBlur",
@@ -87,8 +51,6 @@ export const ReactHookForm = () => {
 
   const checkedDeliveryCycle = watch('delivery_cycle');
 
-  // console.log(errors?.first_name && errors.first_name.message);
-
   return <>
     <h2>React Hook Formを使った検証</h2>
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -97,7 +59,6 @@ export const ReactHookForm = () => {
           placeholder="お名前"
           {...register('first_name', registerOptions.firstName)}
         />
-        {/* {errors?.first_name && errors.first_name.message } */}
         {errors.first_name && <span>お名前を入力してください</span>}
       </div>
       <fieldset>
