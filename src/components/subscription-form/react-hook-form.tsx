@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const ReactHookForm = () => {
-  const { register, handleSubmit } = useForm<SubscriptionFormInput>();
+  const { register, formState: { errors }, handleSubmit } = useForm<SubscriptionFormInput>();
   const onSubmit: SubmitHandler<SubscriptionFormInput> = (data) => {
     console.log(data);
   };
@@ -27,6 +27,7 @@ export const ReactHookForm = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <input {...register('first_name', { required: true, maxLength: 20 })} />
+        {errors.first_name && <span>名前を入力してください</span>}
       </div>
       <fieldset>
         <legend>お届けサイクル</legend>
