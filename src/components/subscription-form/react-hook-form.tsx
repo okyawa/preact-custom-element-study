@@ -1,7 +1,7 @@
-import { Fragment, h, JSX } from "preact";
+import { Fragment, h, JSX, options } from "preact";
 import register from "preact-custom-element";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { deliveryDays, deliveryMonthlyCycle, deliveryWeeklyCycle } from "./value-const";
+import { deliveryDayOfWeek, deliveryDays, deliveryMonthlyCycle, deliveryWeeklyCycle } from "./value-const";
 
 interface SubscriptionFormInput {
   first_name: String;
@@ -9,6 +9,7 @@ interface SubscriptionFormInput {
   delivery_monthly_cycle: string;
   delivery_days: string;
   delivery_weekly_cycle: string;
+  delivery_day_of_week: string;
 }
 
 type Props = {
@@ -44,6 +45,20 @@ export const ReactHookForm = () => {
             {
               Object.keys(deliveryDays)
                 .map((name) => <option value={name}>{deliveryDays[name]}</option>)
+            }
+          </select>
+        </div>
+        <div>
+          <select {...register('delivery_weekly_cycle', { required: true })}>
+            {
+              Object.keys(deliveryWeeklyCycle)
+                .map((name) => <option value={name}>{deliveryWeeklyCycle[name]}</option>)
+            }
+          </select>
+          <select {...register('delivery_day_of_week', { required: true })}>
+            {
+              Object.keys(deliveryDayOfWeek)
+                .map((name) => <option value={name}>{deliveryDayOfWeek[name]}</option>)
             }
           </select>
         </div>
