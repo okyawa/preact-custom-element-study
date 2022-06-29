@@ -1,5 +1,6 @@
 import { Fragment, h } from "preact";
 import register from "preact-custom-element";
+import { useCallback } from "preact/hooks";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { deliveryDayOfWeek, deliveryDays, deliveryMonthlyCycle, deliveryWeeklyCycle } from "./value-const";
 
@@ -37,6 +38,8 @@ export const ReactHookForm = () => {
     register,
     watch,
     // getValues,
+    setError,
+    clearErrors,
     formState: { errors },
     handleSubmit,
   } = useForm<SubscriptionFormInput>({
@@ -45,9 +48,18 @@ export const ReactHookForm = () => {
     reValidateMode: "onBlur",
   });
 
-  const onSubmit: SubmitHandler<SubscriptionFormInput> = (data) => {
+  const onSubmit: SubmitHandler<SubscriptionFormInput> = useCallback((data) => {
+    if (data.delivery_cycle === 'monthly') {
+      if (data.delivery_monthly_cycle === '') {
+        setError('delivery_monthly_cycle', {
+          type: 'manual',
+          message: '選択してください',
+        });
+        clearErrors('delivery_monthly_cycle');
+      }
+    }
     console.log(data);
-  };
+  }, [setError, clearErrors]);
 
   const checkedDeliveryCycle = watch('delivery_cycle');
 
@@ -76,6 +88,7 @@ export const ReactHookForm = () => {
                     .map((name) => <option value={name}>{deliveryMonthlyCycle[name]}</option>)
                 }
               </select>
+              {errors.delivery_monthly_cycle && <span>選択してください</span>}
               <select {...register('delivery_days', { required: true })}>
                 {
                   Object.keys(deliveryDays)

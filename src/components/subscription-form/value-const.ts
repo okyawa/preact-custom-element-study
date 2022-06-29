@@ -9,6 +9,7 @@ export const deliveryCycleCase:  {[key: string]: string} = {
 };
 
 export const deliveryMonthlyCycle: {[key: string]: string} = {
+  '': '---',
   month1: '1ヶ月ごと',
   month2: '2ヶ月ごと',
   month3: '3ヶ月ごと',
