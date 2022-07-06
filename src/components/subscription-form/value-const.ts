@@ -1,14 +1,18 @@
-export const firstShipment: {[key: string]: string} = {
+export type SelectionItemsType = {
+  [key: string]: string
+};
+
+export const firstShipment: SelectionItemsType = {
   earliest: '最短',  
   cycle: 'お届けサイクル通り',  
 };
 
-export const deliveryCycleCase:  {[key: string]: string} = {
+export const deliveryCycleCase: SelectionItemsType = {
   monthly: '月ごと',
   weekly: '週ごと',
 };
 
-export const deliveryMonthlyCycle: {[key: string]: string} = {
+export const deliveryMonthlyCycle: SelectionItemsType = {
   '': '---',
   month1: '1ヶ月ごと',
   month2: '2ヶ月ごと',
@@ -18,7 +22,7 @@ export const deliveryMonthlyCycle: {[key: string]: string} = {
   month6: '6ヶ月ごと',
 };
 
-export const deliveryDays: {[key: string]: string} = {
+export const deliveryDays: SelectionItemsType = {
   day1: '毎月1日',
   day5: '毎月5日',
   day10: '毎月10日',
@@ -28,14 +32,14 @@ export const deliveryDays: {[key: string]: string} = {
   end_of_month: '毎月月末',
 };
 
-export const deliveryWeeklyCycle: {[key: string]: string} = {
+export const deliveryWeeklyCycle: SelectionItemsType = {
   '': '---',
   // week1: '1週毎',
   week2: '2週毎',
   week3: '3週毎',
 };
 
-export const deliveryDayOfWeek: {[key: string]: string} = {
+export const deliveryDayOfWeek: SelectionItemsType = {
   sunday: '日曜日',
   monday: '月曜日',
   tuesday: '火曜日',
