@@ -56,7 +56,7 @@
       hooksForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const formData = new FormData(hooksForm);
-console.log(formData);
+        console.log(formData);
         document.querySelector('#hooks_form_data_value_debug').textContent = JSON.stringify(formData.entries);
       }, false);
     </script>

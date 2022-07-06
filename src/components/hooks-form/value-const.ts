@@ -23,7 +23,7 @@ export const deliveryDayOptions: SelectionItemsType = {
   day15: '毎月15日',
   day20: '毎月20日',
   day25: '毎月25日',
-  end_of_month: '毎月月末',
+  endOfMonth: '毎月月末',
 };
 
 export const deliveryWeeklyCycleOptions: SelectionItemsType = {

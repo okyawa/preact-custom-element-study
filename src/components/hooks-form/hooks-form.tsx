@@ -1,6 +1,6 @@
 import { h, JSX } from "preact";
 import register from "preact-custom-element";
-import { useEffect, useReducer, useRef, useState } from "preact/hooks";
+import { useEffect, useReducer, useRef } from "preact/hooks";
 import { deliveryDayOfWeekOptions, deliveryDayOptions, deliveryMonthlyCycleOptions, deliveryWeeklyCycleOptions } from "./value-const";
 
 type StateType = {
@@ -8,19 +8,19 @@ type StateType = {
 };
 
 type InitialStateType = {
-  delivery_cycle: string;
-  delivery_monthly_cycle: string;
-  delivery_day: string;
-  delivery_weekly_cycle: string;
-  delivery_day_of_week: string;
+  deliveryCycle: string;
+  deliveryMonthlyCycle: string;
+  deliveryDay: string;
+  deliveryWeeklyCycle: string;
+  deliveryDayOfWeek: string;
 };
 
 const initialStateValues: InitialStateType = {
-  delivery_cycle: '',
-  delivery_monthly_cycle: 'month1',
-  delivery_day: 'day1',
-  delivery_weekly_cycle: 'week2',
-  delivery_day_of_week: 'monday',
+  deliveryCycle: '',
+  deliveryMonthlyCycle: 'month1',
+  deliveryDay: 'day1',
+  deliveryWeeklyCycle: 'week2',
+  deliveryDayOfWeek: 'monday',
 };
 
 function reducer(state: InitialStateType, { field, value }: StateType) {
@@ -41,11 +41,11 @@ export const HooksForm = (props: Props) => {
 
   const [state, dispatch] = useReducer(reducer, initialStateValues);
   const {
-    delivery_cycle: deliveryCycle,
-    delivery_monthly_cycle: deliveryMonthlyCycle,
-    delivery_day: deliveryDay,
-    delivery_weekly_cycle: deliveryWeeklyCycle,
-    delivery_day_of_week: deliveryDayOfWeek
+    deliveryCycle,
+    deliveryMonthlyCycle,
+    deliveryDay,
+    deliveryWeeklyCycle,
+    deliveryDayOfWeek
   } = state;
 
   const onChange = (e: JSX.TargetedEvent<HTMLInputElement|HTMLSelectElement, Event>) => {
@@ -67,7 +67,7 @@ export const HooksForm = (props: Props) => {
         <div>
           <input
             type="radio"
-            name="delivery_cycle"
+            name="deliveryCycle"
             id="monthly_cycle"
             value="monthly"
             checked={deliveryCycle === 'monthly'}
@@ -77,13 +77,13 @@ export const HooksForm = (props: Props) => {
         {
           deliveryCycle === 'monthly' && (
             <div>
-              <select onChange={onChange} value={deliveryMonthlyCycle}>
+              <select name="deliveryMonthlyCycle" onChange={onChange} value={deliveryMonthlyCycle}>
                 {
                   Object.keys(deliveryMonthlyCycleOptions)
                     .map((name) => <option value={name}>{deliveryMonthlyCycleOptions[name]}</option>)
                 }
               </select>
-              <select onChange={onChange} value={deliveryDay}>
+              <select name="deliveryDay" onChange={onChange} value={deliveryDay}>
                 {
                   Object.keys(deliveryDayOptions)
                     .map((name) => <option value={name}>{deliveryDayOptions[name]}</option>)
@@ -97,7 +97,7 @@ export const HooksForm = (props: Props) => {
         <div>
           <input
             type="radio"
-            name="delivery_cycle"
+            name="deliveryCycle"
             id="weekly_cycle"
             value="weekly"
             checked={deliveryCycle === 'weekly'}
@@ -107,13 +107,13 @@ export const HooksForm = (props: Props) => {
         {
           deliveryCycle === 'weekly' && (
             <div>
-              <select onChange={onChange} value={deliveryWeeklyCycle}>
+              <select name="deliveryWeeklyCycle" onChange={onChange} value={deliveryWeeklyCycle}>
                 {
                   Object.keys(deliveryWeeklyCycleOptions)
                     .map((name) => <option value={name}>{deliveryWeeklyCycleOptions[name]}</option>)
                 }
               </select>
-              <select onChange={onChange} value={deliveryDayOfWeek}>
+              <select name="deliveryDayOfWeek" onChange={onChange} value={deliveryDayOfWeek}>
                 {
                   Object.keys(deliveryDayOfWeekOptions)
                     .map((name) => <option value={name}>{deliveryDayOfWeekOptions[name]}</option>)
