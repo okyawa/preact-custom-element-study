@@ -14,13 +14,20 @@
     <h2>フォームの埋め込み検証 その3: Controlled Components 02</h2>
     <h3>React Hooksを活用したフォーム</h3>
 
-    <hooks-form></hooks-form>
+    <form id="hooks_form">
+      <hooks-form></hooks-form>
 
-    <div>
-      <h3>Custom Elementsのフォーム外</h3>
-      <h4>入力値</h4>
-      <code id="hooks_form_value_debug"></code>
-    </div>
+      <div>
+        <h3>Custom Elementsのフォーム外</h3>
+        <button>Submit</button>
+        <h4>入力値</h4>
+        <code id="hooks_form_value_debug"></code>
+        <h4>FormData値</h4>
+        <p>取得できない</p>
+        <code id="hooks_form_data_value_debug"></code>
+      </div>
+
+    </form>
 
     <script>
       /**
@@ -31,13 +38,27 @@
        * カスタムイベントを付与した要素のdata属性にJSON.stringifyしたデータを格納し、
        * こちら側で受け取り
        */
-      const hooksFormElem = document.querySelector('hooks-form');
-      hooksFormElem.addEventListener('modified', (event) => {
+      const hooksFormCustomElem = document.querySelector('hooks-form');
+      hooksFormCustomElem.addEventListener('modified', (event) => {
         if (event.target.classList.contains('hooks_form')) {
           console.log(JSON.parse(event.target.dataset.formData));
           document.querySelector('#hooks_form_value_debug').textContent = event.target.dataset.formData;
         }
       }, true);
+    </script>
+
+    <script>
+      /**
+       * form要素の中身あるCustom Elements内のinput要素やselect要素の値がFormDataとして取得できるかの検証
+       * →取得できない
+       */
+      const hooksForm = document.getElementById('hooks_form');
+      hooksForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(hooksForm);
+console.log(formData);
+        document.querySelector('#hooks_form_data_value_debug').textContent = JSON.stringify(formData.entries);
+      }, false);
     </script>
 
     <br />

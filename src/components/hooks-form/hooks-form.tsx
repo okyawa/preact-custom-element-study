@@ -24,7 +24,6 @@ const initialStateValues: InitialStateType = {
 };
 
 function reducer(state: InitialStateType, { field, value }: StateType) {
-console.log(state, field, value);
   return {
     ...state,
     [field]: value,
