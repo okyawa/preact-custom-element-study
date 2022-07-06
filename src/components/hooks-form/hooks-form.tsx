@@ -30,6 +30,13 @@ function reducer(state: InitialStateType, { field, value }: StateType) {
   }
 }
 
+function validateAll(state: InitialStateType): boolean {
+  if (state.delivery_cycle === '') {
+    return false
+  }
+  return true;
+}
+
 type Props = {
 
 };
@@ -57,6 +64,7 @@ export const HooksForm = (props: Props) => {
       myRef.current.dataset.formData = JSON.stringify(state);
       const triggerEvent = new Event('modified')
       myRef.current.dispatchEvent(triggerEvent);
+      myRef.current.dataset.valid = validateAll(state) ? 'true' : 'false';
     }
   }, [state, dispatch]);
 
