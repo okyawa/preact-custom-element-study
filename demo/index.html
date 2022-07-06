@@ -11,13 +11,47 @@
 
     <h1>Preactで作ったコンポーネントをCustom Elementsとして使うサンプル</h1>
 
-    <h2>フォームの埋め込み検証: React Hook Form (Uncontrolled Components)</h2>
+    <h2>フォームの埋め込み検証 その3: Controlled Components 02</h2>
+    <h3>React Hooksを活用したフォーム</h3>
+
+    <hooks-form></hooks-form>
+
+    <div>
+      <h3>Custom Elementsのフォーム外</h3>
+      <h4>入力値</h4>
+      <code id="hooks_form_value_debug"></code>
+    </div>
+
+    <script>
+      /**
+       * Custom Elements内からのイベントを受け取り
+       * 
+       * Custom Elements自体にはイベントを付与できないため、
+       * Shadow DOMをOFFにした状態で、Custom Elements内の要素にカスタムイベントを付与し、
+       * カスタムイベントを付与した要素のdata属性にJSON.stringifyしたデータを格納し、
+       * こちら側で受け取り
+       */
+      const hooksFormElem = document.querySelector('hooks-form');
+      hooksFormElem.addEventListener('modified', (event) => {
+        if (event.target.classList.contains('hooks_form')) {
+          console.log(JSON.parse(event.target.dataset.formData));
+          document.querySelector('#hooks_form_value_debug').textContent = event.target.dataset.formData;
+        }
+      }, true);
+    </script>
+
+    <br />
+    <hr />
+    <br />
+
+
+    <h2>フォームの埋め込み検証 その2: React Hook Form (Uncontrolled Components)</h2>
 
     <react-hook-form></react-hook-form>
 
     <hr />
 
-    <h2>フォームの埋め込み検証: Controlled Components</h2>
+    <h2>フォームの埋め込み検証 その1: Controlled Components 01</h2>
 
     <subscription-form></subscription-form>
 
@@ -77,7 +111,9 @@
       });
     </script>
 
+    <br />
     <hr />
+    <br />
 
     <h2>"<code>video-hls</code>"のCustom Elements</h2>
     <video-hls src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"></video-hls>
