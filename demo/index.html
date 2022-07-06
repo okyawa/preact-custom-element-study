@@ -23,7 +23,6 @@
         <h4>入力値</h4>
         <code id="hooks_form_value_debug"></code>
         <h4>FormData値</h4>
-        <p>取得できない</p>
         <code id="hooks_form_data_value_debug"></code>
       </div>
 
@@ -50,14 +49,18 @@
     <script>
       /**
        * form要素の中身あるCustom Elements内のinput要素やselect要素の値がFormDataとして取得できるかの検証
-       * →取得できない
+       * →取得できる
        */
       const hooksForm = document.getElementById('hooks_form');
       hooksForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const formData = new FormData(hooksForm);
-        console.log(formData);
-        document.querySelector('#hooks_form_data_value_debug').textContent = JSON.stringify(formData.entries);
+        console.log(...formData.entries());
+        const data = {};
+        for (let value of formData.entries()) { 
+          data[value[0]] = value[1]; 
+        }
+        document.querySelector('#hooks_form_data_value_debug').textContent = JSON.stringify(data);
       }, false);
     </script>
 

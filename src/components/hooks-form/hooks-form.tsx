@@ -8,19 +8,19 @@ type StateType = {
 };
 
 type InitialStateType = {
-  deliveryCycle: string;
-  deliveryMonthlyCycle: string;
-  deliveryDay: string;
-  deliveryWeeklyCycle: string;
-  deliveryDayOfWeek: string;
+  delivery_cycle: string;
+  delivery_monthly_cycle: string;
+  delivery_day: string;
+  delivery_weekly_cycle: string;
+  delivery_day_of_week: string;
 };
 
 const initialStateValues: InitialStateType = {
-  deliveryCycle: '',
-  deliveryMonthlyCycle: 'month1',
-  deliveryDay: 'day1',
-  deliveryWeeklyCycle: 'week2',
-  deliveryDayOfWeek: 'monday',
+  delivery_cycle: '',
+  delivery_monthly_cycle: 'month1',
+  delivery_day: 'day1',
+  delivery_weekly_cycle: 'week2',
+  delivery_day_of_week: 'monday',
 };
 
 function reducer(state: InitialStateType, { field, value }: StateType) {
@@ -41,11 +41,11 @@ export const HooksForm = (props: Props) => {
 
   const [state, dispatch] = useReducer(reducer, initialStateValues);
   const {
-    deliveryCycle,
-    deliveryMonthlyCycle,
-    deliveryDay,
-    deliveryWeeklyCycle,
-    deliveryDayOfWeek
+    delivery_cycle,
+    delivery_monthly_cycle,
+    delivery_day,
+    delivery_weekly_cycle,
+    delivery_day_of_week
   } = state;
 
   const onChange = (e: JSX.TargetedEvent<HTMLInputElement|HTMLSelectElement, Event>) => {
@@ -67,23 +67,23 @@ export const HooksForm = (props: Props) => {
         <div>
           <input
             type="radio"
-            name="deliveryCycle"
+            name="delivery_cycle"
             id="monthly_cycle"
             value="monthly"
-            checked={deliveryCycle === 'monthly'}
+            checked={delivery_cycle === 'monthly'}
             onChange={onChange} />
           <label for="monthly_cycle">月ごと</label>
         </div>
         {
-          deliveryCycle === 'monthly' && (
+          delivery_cycle === 'monthly' && (
             <div>
-              <select name="deliveryMonthlyCycle" onChange={onChange} value={deliveryMonthlyCycle}>
+              <select name="delivery_monthly_cycle" onChange={onChange} value={delivery_monthly_cycle}>
                 {
                   Object.keys(deliveryMonthlyCycleOptions)
                     .map((name) => <option value={name}>{deliveryMonthlyCycleOptions[name]}</option>)
                 }
               </select>
-              <select name="deliveryDay" onChange={onChange} value={deliveryDay}>
+              <select name="delivery_day" onChange={onChange} value={delivery_day}>
                 {
                   Object.keys(deliveryDayOptions)
                     .map((name) => <option value={name}>{deliveryDayOptions[name]}</option>)
@@ -97,23 +97,23 @@ export const HooksForm = (props: Props) => {
         <div>
           <input
             type="radio"
-            name="deliveryCycle"
+            name="delivery_cycle"
             id="weekly_cycle"
             value="weekly"
-            checked={deliveryCycle === 'weekly'}
+            checked={delivery_cycle === 'weekly'}
             onChange={onChange} />
           <label for="weekly_cycle">週ごと</label>
         </div>
         {
-          deliveryCycle === 'weekly' && (
+          delivery_cycle === 'weekly' && (
             <div>
-              <select name="deliveryWeeklyCycle" onChange={onChange} value={deliveryWeeklyCycle}>
+              <select name="delivery_weekly_cycle" onChange={onChange} value={delivery_weekly_cycle}>
                 {
                   Object.keys(deliveryWeeklyCycleOptions)
                     .map((name) => <option value={name}>{deliveryWeeklyCycleOptions[name]}</option>)
                 }
               </select>
-              <select name="deliveryDayOfWeek" onChange={onChange} value={deliveryDayOfWeek}>
+              <select name="delivery_day_of_week" onChange={onChange} value={delivery_day_of_week}>
                 {
                   Object.keys(deliveryDayOfWeekOptions)
                     .map((name) => <option value={name}>{deliveryDayOfWeekOptions[name]}</option>)
