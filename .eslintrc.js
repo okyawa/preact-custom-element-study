@@ -11,6 +11,16 @@ module.exports = {
       },
     },
   },
+  env: {
+    es2022: true,
+  },
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2020,
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
   rules: {
     'space-before-function-paren': [
       'warn',
