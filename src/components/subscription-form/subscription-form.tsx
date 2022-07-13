@@ -1,6 +1,7 @@
 import { h, JSX } from 'preact';
 import register from 'preact-custom-element';
 import { useEffect, useRef, useState } from 'preact/hooks';
+
 import { deliveryDayOfWeek, deliveryDays, deliveryMonthlyCycle, deliveryWeeklyCycle } from './value-const';
 
 type Props = {};

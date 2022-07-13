@@ -1,4 +1,5 @@
 import { Fragment, h, JSX } from 'preact';
+
 import { ActionType, HtmlAttrListType } from '../lib/form-type';
 
 type Props = {

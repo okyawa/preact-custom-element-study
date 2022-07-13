@@ -1,7 +1,7 @@
-import { h, JSX } from 'preact';
-import { useEffect, useRef } from 'preact/hooks';
 import Hls from 'hls.js';
+import { h, JSX } from 'preact';
 import register from 'preact-custom-element';
+import { useEffect, useRef } from 'preact/hooks';
 
 type Props = JSX.HTMLAttributes<HTMLVideoElement>;
 

@@ -1,6 +1,6 @@
 import { h } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
 import register from 'preact-custom-element';
+import { useEffect, useState } from 'preact/hooks';
 
 type Props = {
   name: string;
