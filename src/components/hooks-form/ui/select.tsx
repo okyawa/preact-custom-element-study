@@ -19,7 +19,9 @@ export const Select = ({ options, name, currentValue: value, dispatch }: Props) 
     <>
       <select name={name} onChange={onChange} value={value}>
         {Object.keys(options).map((key) => (
-          <option value={key}>{options[key]}</option>
+          <option key={key} value={key}>
+            {options[key]}
+          </option>
         ))}
       </select>
     </>

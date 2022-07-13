@@ -19,7 +19,7 @@ export const InputRadio = ({ name, value, id, currentValue, label, dispatch }: P
   return (
     <>
       <input type="radio" name={name} id={id} value={value} checked={currentValue === value} onChange={onChange} />
-      <label for={id}>{label}</label>
+      <label htmlFor={id}>{label}</label>
     </>
   );
 };

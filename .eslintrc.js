@@ -3,6 +3,7 @@ module.exports = {
   settings: {
     react: {
       version: 'detect',
+      pragma: 'h',
     },
     'import/resolver': {
       node: {
