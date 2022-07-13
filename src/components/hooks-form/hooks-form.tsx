@@ -1,35 +1,15 @@
 import { h, JSX } from "preact";
 import register from "preact-custom-element";
 import { useEffect, useReducer, useRef } from "preact/hooks";
-import { deliveryDayOfWeekOptions, deliveryDayOptions, deliveryMonthlyCycleOptions, deliveryWeeklyCycleOptions } from "./value-const";
 
-type FormActionType = {
-  field: string;
-  value: string;
-};
-
-type FormStateType = {
-  delivery_cycle: string;
-  delivery_monthly_cycle: string;
-  delivery_day: string;
-  delivery_weekly_cycle: string;
-  delivery_day_of_week: string;
-};
-
-const initialFormStateValues: FormStateType = {
-  delivery_cycle: '',
-  delivery_monthly_cycle: 'month1',
-  delivery_day: 'day1',
-  delivery_weekly_cycle: 'week2',
-  delivery_day_of_week: 'monday',
-};
-
-function formStateReducer(state: FormStateType, { field, value }: FormActionType) {
-  return {
-    ...state,
-    [field]: value,
-  }
-}
+import { formStateReducer } from "./lib/form-state-reducer";
+import { FormStateType, initialFormStateValues } from "./lib/form-type";
+import {
+  deliveryDayOfWeekOptions,
+  deliveryDayOptions,
+  deliveryMonthlyCycleOptions,
+  deliveryWeeklyCycleOptions,
+} from "./value-const";
 
 function validateAll(state: FormStateType): boolean {
   if (state.delivery_cycle === '') {
