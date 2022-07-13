@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/named
 import { h, JSX } from 'preact';
 import register from 'preact-custom-element';
 import { useEffect, useRef, useState } from 'preact/hooks';
