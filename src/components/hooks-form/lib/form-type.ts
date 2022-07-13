@@ -1,4 +1,4 @@
-export type FormActionType = {
+export type ActionType = {
   field: string;
   value: string;
 };

@@ -4,6 +4,7 @@ import { useEffect, useReducer, useRef } from "preact/hooks";
 
 import { formStateReducer } from "./lib/form-state-reducer";
 import { FormStateType, initialFormStateValues } from "./lib/form-type";
+import { InputRadio } from "./ui/input-radio";
 import { Select } from "./ui/select";
 import {
   deliveryDayOfWeekOptions,
@@ -56,27 +57,26 @@ export const HooksForm = (props: Props) => {
         <legend>お届けサイクル</legend>
         <div>
           <div>
-            <input
-              type="radio"
+            <InputRadio
               name="delivery_cycle"
               id="monthly_cycle"
               value="monthly"
-              checked={delivery_cycle === "monthly"}
-              onChange={onChange}
+              label="月ごと"
+              currentValue={delivery_cycle}
+              dispatch={dispatch}
             />
-            <label for="monthly_cycle">月ごと</label>
           </div>
           {delivery_cycle === "monthly" && (
             <div>
               <Select
                 name="delivery_monthly_cycle"
-                value={delivery_monthly_cycle}
+                currentValue={delivery_monthly_cycle}
                 options={deliveryMonthlyCycleOptions}
                 dispatch={dispatch}
               />
               <Select
                 name="delivery_day"
-                value={delivery_day}
+                currentValue={delivery_day}
                 options={deliveryDayOptions}
                 dispatch={dispatch}
               />
@@ -85,27 +85,26 @@ export const HooksForm = (props: Props) => {
         </div>
         <div>
           <div>
-            <input
-              type="radio"
+            <InputRadio
               name="delivery_cycle"
               id="weekly_cycle"
               value="weekly"
-              checked={delivery_cycle === "weekly"}
-              onChange={onChange}
+              label="週ごと"
+              currentValue={delivery_cycle}
+              dispatch={dispatch}
             />
-            <label for="weekly_cycle">週ごと</label>
           </div>
           {delivery_cycle === "weekly" && (
             <div>
               <Select
                 name="delivery_weekly_cycle"
-                value={delivery_weekly_cycle}
+                currentValue={delivery_weekly_cycle}
                 options={deliveryWeeklyCycleOptions}
                 dispatch={dispatch}
               />
               <Select
                 name="delivery_day_of_week"
-                value={delivery_day_of_week}
+                currentValue={delivery_day_of_week}
                 options={deliveryDayOfWeekOptions}
                 dispatch={dispatch}
               />
