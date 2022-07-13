@@ -4,6 +4,7 @@ import { useEffect, useReducer, useRef } from "preact/hooks";
 
 import { formStateReducer } from "./lib/form-state-reducer";
 import { FormStateType, initialFormStateValues } from "./lib/form-type";
+import { Select } from "./ui/select";
 import {
   deliveryDayOfWeekOptions,
   deliveryDayOptions,
@@ -49,72 +50,71 @@ export const HooksForm = (props: Props) => {
     }
   }, [state, dispatch]);
 
-  return <div class="hooks_form" ref={myRef}>
-    <fieldset>
-      <legend>お届けサイクル</legend>
-      <div>
+  return (
+    <div class="hooks_form" ref={myRef}>
+      <fieldset>
+        <legend>お届けサイクル</legend>
         <div>
-          <input
-            type="radio"
-            name="delivery_cycle"
-            id="monthly_cycle"
-            value="monthly"
-            checked={delivery_cycle === 'monthly'}
-            onChange={onChange} />
-          <label for="monthly_cycle">月ごと</label>
-        </div>
-        {
-          delivery_cycle === 'monthly' && (
+          <div>
+            <input
+              type="radio"
+              name="delivery_cycle"
+              id="monthly_cycle"
+              value="monthly"
+              checked={delivery_cycle === "monthly"}
+              onChange={onChange}
+            />
+            <label for="monthly_cycle">月ごと</label>
+          </div>
+          {delivery_cycle === "monthly" && (
             <div>
-              <select name="delivery_monthly_cycle" onChange={onChange} value={delivery_monthly_cycle}>
-                {
-                  Object.keys(deliveryMonthlyCycleOptions)
-                    .map((name) => <option value={name}>{deliveryMonthlyCycleOptions[name]}</option>)
-                }
-              </select>
-              <select name="delivery_day" onChange={onChange} value={delivery_day}>
-                {
-                  Object.keys(deliveryDayOptions)
-                    .map((name) => <option value={name}>{deliveryDayOptions[name]}</option>)
-                }
-              </select>
+              <Select
+                name="delivery_monthly_cycle"
+                value={delivery_monthly_cycle}
+                options={deliveryMonthlyCycleOptions}
+                dispatch={dispatch}
+              />
+              <Select
+                name="delivery_day"
+                value={delivery_day}
+                options={deliveryDayOptions}
+                dispatch={dispatch}
+              />
             </div>
-          )
-        }
-      </div>
-      <div>
+          )}
+        </div>
         <div>
-          <input
-            type="radio"
-            name="delivery_cycle"
-            id="weekly_cycle"
-            value="weekly"
-            checked={delivery_cycle === 'weekly'}
-            onChange={onChange} />
-          <label for="weekly_cycle">週ごと</label>
-        </div>
-        {
-          delivery_cycle === 'weekly' && (
+          <div>
+            <input
+              type="radio"
+              name="delivery_cycle"
+              id="weekly_cycle"
+              value="weekly"
+              checked={delivery_cycle === "weekly"}
+              onChange={onChange}
+            />
+            <label for="weekly_cycle">週ごと</label>
+          </div>
+          {delivery_cycle === "weekly" && (
             <div>
-              <select name="delivery_weekly_cycle" onChange={onChange} value={delivery_weekly_cycle}>
-                {
-                  Object.keys(deliveryWeeklyCycleOptions)
-                    .map((name) => <option value={name}>{deliveryWeeklyCycleOptions[name]}</option>)
-                }
-              </select>
-              <select name="delivery_day_of_week" onChange={onChange} value={delivery_day_of_week}>
-                {
-                  Object.keys(deliveryDayOfWeekOptions)
-                    .map((name) => <option value={name}>{deliveryDayOfWeekOptions[name]}</option>)
-                }
-              </select>
+              <Select
+                name="delivery_weekly_cycle"
+                value={delivery_weekly_cycle}
+                options={deliveryWeeklyCycleOptions}
+                dispatch={dispatch}
+              />
+              <Select
+                name="delivery_day_of_week"
+                value={delivery_day_of_week}
+                options={deliveryDayOfWeekOptions}
+                dispatch={dispatch}
+              />
             </div>
-          )
-        }
-      </div>
-    </fieldset>
-
-  </div>;
+          )}
+        </div>
+      </fieldset>
+    </div>
+  );
 }
 
 register(

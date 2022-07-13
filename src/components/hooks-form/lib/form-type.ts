@@ -18,3 +18,11 @@ export const initialFormStateValues: FormStateType = {
   delivery_weekly_cycle: 'week2',
   delivery_day_of_week: 'monday',
 };
+
+export type OptionListType = {
+  [key: string]: string;
+};
+
+export type HtmlAttrListType = {
+  [key: string]: string;
+}
