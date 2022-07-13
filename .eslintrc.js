@@ -1,0 +1,68 @@
+module.exports = {
+  extends: [
+    "prettier",
+    "plugin:import/recommended",
+    "plugin:import/warnings",
+  ],
+  settings: {
+    react: {
+      version: "detect",
+    },
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+      },
+    },
+  },
+  rules: {
+    "space-before-function-paren": [
+      "warn",
+      {
+        anonymous: "always",
+        named: "never",
+        asyncArrow: "always",
+      },
+    ],
+    "no-useless-constructor": "off",
+    "no-use-before-define": "off",
+    "comma-dangle": ["warn", "always-multiline"],
+    // 'no-unused-vars': 'warn',
+    semi: ["warn", "never", { beforeStatementContinuationChars: "never" }],
+    "semi-spacing": ["warn", { after: true, before: false }],
+    "semi-style": ["warn", "first"],
+    "no-extra-semi": "warn",
+    "no-unexpected-multiline": "error",
+    "no-unreachable": "warn",
+    "padded-blocks": ["warn", "never"],
+    "no-trailing-spaces": "warn",
+    "space-before-blocks": "warn",
+    "no-multiple-empty-lines": "warn",
+    indent: ["warn", 2, { SwitchCase: 1 }],
+    "eol-last": "warn",
+    quotes: [
+      "warn",
+      "single",
+      {
+        allowTemplateLiterals: true,
+      },
+    ],
+    "import/order": [
+      "warn",
+      {
+        groups: ["external", "parent", "sibling", "index", "object", "type"],
+        pathGroups: [
+          {
+            pattern: "@alias/**",
+            group: "parent",
+            position: "before",
+          },
+        ],
+        alphabetize: {
+          order: "asc",
+        },
+        "newlines-between": "always",
+      },
+    ],
+    "react/react-in-jsx-scope": "off",
+  },
+};
