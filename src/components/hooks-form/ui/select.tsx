@@ -1,6 +1,6 @@
-import { Fragment, h, JSX } from "preact";
+import { Fragment, h, JSX } from 'preact';
 
-import { ActionType, HtmlAttrListType, OptionListType } from "../lib/form-type";
+import { ActionType, HtmlAttrListType, OptionListType } from '../lib/form-type';
 
 type Props = {
   name: string;
@@ -10,12 +10,7 @@ type Props = {
   dispatch: (action: ActionType) => void;
 };
 
-export const Select = ({
-  options,
-  name,
-  currentValue: value,
-  dispatch,
-}: Props) => {
+export const Select = ({ options, name, currentValue: value, dispatch }: Props) => {
   const onChange = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => {
     dispatch({ field: e.currentTarget.name, value: e.currentTarget.value });
   };

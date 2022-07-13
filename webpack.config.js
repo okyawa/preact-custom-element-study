@@ -1,17 +1,17 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const isProduction = process.env.NODE_ENV === "production";
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  mode: isProduction ? "production" : "development",
+  mode: isProduction ? 'production' : 'development',
   entry: {
-    "video-hls": "./src/index.tsx",
-    "product-fom": "./src/product-fom.tsx",
+    'video-hls': './src/index.tsx',
+    'product-fom': './src/product-fom.tsx',
   },
   output: {
-    path: path.resolve(__dirname, "./dist"),
-    filename: "[name].js",
+    path: path.resolve(__dirname, './dist'),
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -19,7 +19,7 @@ module.exports = {
         test: /\.tsx?$/,
         use: [
           {
-            loader: "ts-loader",
+            loader: 'ts-loader',
           },
         ],
         exclude: /node_modules/,
@@ -27,16 +27,16 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".ts", ".tsx"],
+    extensions: ['.ts', '.tsx'],
     alias: {
-      react: "preact/compat",
-      "react-dom/test-utils": "preact/test-utils",
-      "react-dom": "preact/compat",
+      react: 'preact/compat',
+      'react-dom/test-utils': 'preact/test-utils',
+      'react-dom': 'preact/compat',
       // test-utilsの下にある必要があります。
     },
   },
   plugins: [
-/*
+    /*
     // 下記のJSXの設定を加えるとエラーになるので、一旦コメントアウト
     [
       "@babel/plugin-transform-react-jsx", {
@@ -46,7 +46,7 @@ module.exports = {
     ],
 */
     new HtmlWebpackPlugin({
-      template: "./demo/index.html",
+      template: './demo/index.html',
     }),
   ],
 };

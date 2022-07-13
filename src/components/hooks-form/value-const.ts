@@ -1,5 +1,5 @@
 export type SelectionItemsType = {
-  [key: string]: string
+  [key: string]: string;
 };
 
 export const deliveryCycleCaseOptions: SelectionItemsType = {

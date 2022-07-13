@@ -1,20 +1,20 @@
-import { Fragment, h } from "preact";
-import register from "preact-custom-element";
-import { useEffect, useReducer, useRef } from "preact/hooks";
+import { Fragment, h } from 'preact';
+import register from 'preact-custom-element';
+import { useEffect, useReducer, useRef } from 'preact/hooks';
 
-import { formStateReducer } from "./lib/form-state-reducer";
-import { FormStateType, initialFormStateValues } from "./lib/form-type";
-import { InputRadio } from "./ui/input-radio";
-import { Select } from "./ui/select";
+import { formStateReducer } from './lib/form-state-reducer';
+import { FormStateType, initialFormStateValues } from './lib/form-type';
+import { InputRadio } from './ui/input-radio';
+import { Select } from './ui/select';
 import {
   deliveryDayOfWeekOptions,
   deliveryDayOptions,
   deliveryMonthlyCycleOptions,
   deliveryWeeklyCycleOptions,
-} from "./value-const";
+} from './value-const';
 
 function validateAll(state: FormStateType): boolean {
-  if (state.delivery_cycle === "") {
+  if (state.delivery_cycle === '') {
     return false;
   }
   return true;
@@ -26,24 +26,15 @@ export const HooksForm = (props: Props) => {
   // Webコンポーネントのインスタンスにアクセス
   const myRef = useRef<HTMLDivElement>(null);
 
-  const [state, dispatch] = useReducer(
-    formStateReducer,
-    initialFormStateValues
-  );
-  const {
-    delivery_cycle,
-    delivery_monthly_cycle,
-    delivery_day,
-    delivery_weekly_cycle,
-    delivery_day_of_week,
-  } = state;
+  const [state, dispatch] = useReducer(formStateReducer, initialFormStateValues);
+  const { delivery_cycle, delivery_monthly_cycle, delivery_day, delivery_weekly_cycle, delivery_day_of_week } = state;
 
   useEffect(() => {
     if (myRef.current) {
       myRef.current.dataset.formData = JSON.stringify(state);
-      const triggerEvent = new Event("modified");
+      const triggerEvent = new Event('modified');
       myRef.current.dispatchEvent(triggerEvent);
-      myRef.current.dataset.valid = validateAll(state) ? "true" : "false";
+      myRef.current.dataset.valid = validateAll(state) ? 'true' : 'false';
     }
   }, [state, dispatch]);
 
@@ -63,7 +54,7 @@ export const HooksForm = (props: Props) => {
                 dispatch={dispatch}
               />
             </div>
-            {delivery_cycle === "monthly" && (
+            {delivery_cycle === 'monthly' && (
               <div>
                 <Select
                   name="delivery_monthly_cycle"
@@ -91,7 +82,7 @@ export const HooksForm = (props: Props) => {
                 dispatch={dispatch}
               />
             </div>
-            {delivery_cycle === "weekly" && (
+            {delivery_cycle === 'weekly' && (
               <div>
                 <Select
                   name="delivery_weekly_cycle"
@@ -114,4 +105,4 @@ export const HooksForm = (props: Props) => {
   );
 };
 
-register(HooksForm, "hooks-form", [], { shadow: false });
+register(HooksForm, 'hooks-form', [], { shadow: false });

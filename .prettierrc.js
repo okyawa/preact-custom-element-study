@@ -13,4 +13,4 @@ module.exports = {
   htmlWhitespaceSensitivity: 'css',
   endOfLine: 'lf',
   embeddedLanguageFormatting: 'off',
-}
+};

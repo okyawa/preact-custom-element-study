@@ -1,10 +1,10 @@
 export type SelectionItemsType = {
-  [key: string]: string
+  [key: string]: string;
 };
 
 export const firstShipment: SelectionItemsType = {
-  earliest: '最短',  
-  cycle: 'お届けサイクル通り',  
+  earliest: '最短',
+  cycle: 'お届けサイクル通り',
 };
 
 export const deliveryCycleCase: SelectionItemsType = {

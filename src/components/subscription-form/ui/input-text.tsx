@@ -1,8 +1,7 @@
-import { Fragment, h } from "preact";
+import { Fragment, h } from 'preact';
 import { Path, UseFormRegister } from 'react-hook-form';
 
 import { SubscriptionFormInput } from '../react-hook-form';
-
 
 type Props = {
   name: Path<SubscriptionFormInput>;
@@ -12,8 +11,10 @@ type Props = {
 };
 
 export const InputText = ({ name, label, register, required }: Props) => {
-  return <>
-    <label>{label}</label>
-    <input {...register(name, { required })} />
-  </>
+  return (
+    <>
+      <label>{label}</label>
+      <input {...register(name, { required })} />
+    </>
+  );
 };

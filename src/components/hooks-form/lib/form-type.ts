@@ -25,4 +25,4 @@ export type OptionListType = {
 
 export type HtmlAttrListType = {
   [key: string]: string;
-}
+};

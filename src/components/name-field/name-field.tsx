@@ -1,6 +1,6 @@
-import { h } from "preact";
-import { useEffect, useState } from "preact/hooks";
-import register from "preact-custom-element";
+import { h } from 'preact';
+import { useEffect, useState } from 'preact/hooks';
+import register from 'preact-custom-element';
 
 type Props = {
   name: string;
@@ -10,26 +10,15 @@ type Props = {
 export const NameField = (props: Props) => {
   const [value, setValue] = useState<string>('');
 
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   const name = props.name;
-  return <div>
-      <input name={name} value={value} onChange={(event) => console.log(event.target) } />
-      <div>
-        Custom Element外の入力欄の値: {props.message}
-      </div>
-    </div>;
-}
+  return (
+    <div>
+      <input name={name} value={value} onChange={(event) => console.log(event.target)} />
+      <div>Custom Element外の入力欄の値: {props.message}</div>
+    </div>
+  );
+};
 
-register(
-  NameField,
-  "name-field",
-  [
-    "name",
-    "message",
-    "style",
-    "class",
-  ],
-  { shadow: true },
-);
+register(NameField, 'name-field', ['name', 'message', 'style', 'class'], { shadow: true });
