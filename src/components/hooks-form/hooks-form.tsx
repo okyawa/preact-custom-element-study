@@ -3,11 +3,12 @@ import register from "preact-custom-element";
 import { useEffect, useReducer, useRef } from "preact/hooks";
 import { deliveryDayOfWeekOptions, deliveryDayOptions, deliveryMonthlyCycleOptions, deliveryWeeklyCycleOptions } from "./value-const";
 
-type StateType = {
-  [key: string]: string;
+type FormActionType = {
+  field: string;
+  value: string;
 };
 
-type InitialStateType = {
+type FormStateType = {
   delivery_cycle: string;
   delivery_monthly_cycle: string;
   delivery_day: string;
@@ -15,7 +16,7 @@ type InitialStateType = {
   delivery_day_of_week: string;
 };
 
-const initialStateValues: InitialStateType = {
+const initialFormStateValues: FormStateType = {
   delivery_cycle: '',
   delivery_monthly_cycle: 'month1',
   delivery_day: 'day1',
@@ -23,14 +24,14 @@ const initialStateValues: InitialStateType = {
   delivery_day_of_week: 'monday',
 };
 
-function reducer(state: InitialStateType, { field, value }: StateType) {
+function formStateReducer(state: FormStateType, { field, value }: FormActionType) {
   return {
     ...state,
     [field]: value,
   }
 }
 
-function validateAll(state: InitialStateType): boolean {
+function validateAll(state: FormStateType): boolean {
   if (state.delivery_cycle === '') {
     return false
   }
@@ -46,7 +47,7 @@ export const HooksForm = (props: Props) => {
   // Webコンポーネントのインスタンスにアクセス
   const myRef = useRef<HTMLDivElement>(null);
 
-  const [state, dispatch] = useReducer(reducer, initialStateValues);
+  const [state, dispatch] = useReducer(formStateReducer, initialFormStateValues);
   const {
     delivery_cycle,
     delivery_monthly_cycle,
