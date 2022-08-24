@@ -22,25 +22,33 @@ function validateAll(state: FormStateType): boolean {
 
 type Props = {};
 
+const CUSTOM_ELEMENT_NAME = 'hooks-form';
+
 export const HooksForm = (props: Props) => {
   // Webコンポーネントのインスタンスにアクセス
-  const myRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const [state, dispatch] = useReducer(formStateReducer, initialFormStateValues);
   const { delivery_cycle, delivery_monthly_cycle, delivery_day, delivery_weekly_cycle, delivery_day_of_week } = state;
 
   useEffect(() => {
-    if (myRef.current) {
-      myRef.current.dataset.formData = JSON.stringify(state);
-      const triggerEvent = new Event('modified');
-      myRef.current.dispatchEvent(triggerEvent);
-      myRef.current.dataset.valid = validateAll(state) ? 'true' : 'false';
+    if (!wrapperRef.current) {
+      return;
     }
+    const hostElement: HTMLElement|null = wrapperRef.current.closest(CUSTOM_ELEMENT_NAME);
+    if (hostElement === null) {
+      return;
+    }
+    hostElement.dataset.formData = JSON.stringify(state);
+    const triggerEvent = new Event('modified');
+// console.log('セレクタ', myRef.current.closest('hooks-form'));
+    hostElement.dispatchEvent(triggerEvent);
+    hostElement.dataset.valid = validateAll(state) ? 'true' : 'false';
   }, [state, dispatch]);
 
   return (
     <>
-      <div class="hooks_form" ref={myRef}>
+      <div class="hooks_form" ref={wrapperRef}>
         <fieldset>
           <legend>お届けサイクル</legend>
           <div>
@@ -105,4 +113,4 @@ export const HooksForm = (props: Props) => {
   );
 };
 
-register(HooksForm, 'hooks-form', [], { shadow: false });
+register(HooksForm, CUSTOM_ELEMENT_NAME, [], { shadow: false });

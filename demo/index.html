@@ -41,12 +41,10 @@
        */
       const hooksFormCustomElem = document.querySelector('hooks-form');
       hooksFormCustomElem.addEventListener('modified', (event) => {
-        if (event.target.classList.contains('hooks_form')) {
-          console.log(JSON.parse(event.target.dataset.formData));
-          document.querySelector('#hooks_form_value_debug').textContent = event.target.dataset.formData;
-          document.querySelector('#hooks_form_validation_debug').textContent = event.target.dataset.valid;
-        }
-      }, true);
+        console.log('hooks-formから受け取ったデータ: ', JSON.parse(event.currentTarget.dataset.formData));
+        document.querySelector('#hooks_form_value_debug').textContent = event.currentTarget.dataset.formData;
+        document.querySelector('#hooks_form_validation_debug').textContent = event.currentTarget.dataset.valid;
+      }, false);
     </script>
 
     <script>
