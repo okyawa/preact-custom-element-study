@@ -11,5 +11,9 @@ module.exports = {
   "framework": "@storybook/preact",
   "core": {
     "builder": "@storybook/builder-webpack5"
-  }
+  },
+  babel: async options => ({
+    ...options,
+    presets: [["@babel/typescript", { jsxPragma: "h" }]],
+  }),
 }
