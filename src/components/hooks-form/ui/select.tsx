@@ -17,7 +17,7 @@ export const Select = ({ options, name, currentValue: value, dispatch }: Props) 
   };
 
   return (
-    <>
+    <Fragment>
       <select name={name} onChange={onChange} value={value}>
         {Object.keys(options).map((key) => (
           <option key={key} value={key}>
@@ -25,6 +25,6 @@ export const Select = ({ options, name, currentValue: value, dispatch }: Props) 
           </option>
         ))}
       </select>
-    </>
+    </Fragment>
   );
 };

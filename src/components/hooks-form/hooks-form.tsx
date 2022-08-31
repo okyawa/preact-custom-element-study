@@ -47,7 +47,7 @@ export const HooksForm = (props: Props) => {
   }, [state, dispatch]);
 
   return (
-    <>
+    <Fragment>
       <div class="hooks_form" ref={wrapperRef}>
         <fieldset>
           <legend>お届けサイクル</legend>
@@ -109,7 +109,7 @@ export const HooksForm = (props: Props) => {
           </div>
         </fieldset>
       </div>
-    </>
+    </Fragment>
   );
 };
 
