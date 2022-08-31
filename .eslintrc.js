@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['prettier', 'plugin:import/recommended', 'plugin:import/warnings'],
+  extends: ['prettier', 'plugin:import/recommended', 'plugin:import/warnings', 'plugin:storybook/recommended'],
   settings: {
     react: {
       version: 'detect',
