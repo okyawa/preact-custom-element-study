@@ -20,7 +20,9 @@ function validateAll(state: FormStateType): boolean {
   return true;
 }
 
-type Props = {};
+type Props = {
+  name?: string;
+};
 
 const CUSTOM_ELEMENT_NAME = 'hooks-form';
 
@@ -49,6 +51,9 @@ export const HooksForm = (props: Props) => {
   return (
     <Fragment>
       <div class="hooks_form" ref={wrapperRef}>
+        {props.name && (
+          <div>お名前: {props.name}</div>
+        )}
         <fieldset>
           <legend>お届けサイクル</legend>
           <div>
