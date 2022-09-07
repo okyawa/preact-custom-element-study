@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "hls.js": "^1.1.5",
-    "preact": "^10.10.6",
+    "preact": "^10.9.0",
     "preact-custom-element": "^4.2.1",
     "react-hook-form": "^7.32.2"
   },
