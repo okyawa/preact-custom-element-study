@@ -1,5 +1,7 @@
 // import { Meta, StoryObj, StoryFn } from '@storybook/preact';
+import { expect } from '@storybook/jest';
 import * as sb from '@storybook/preact';
+import { fireEvent, waitFor, within } from '@storybook/testing-library';
 import { h } from 'preact';
 
 import { HooksForm } from './hooks-form';
@@ -50,4 +52,19 @@ Primary.args = {
 export const Secondary = Template.bind({});
 Secondary.args = {
   name: 'Nancy',
+};
+
+Secondary.play = async ( { canvasElement } ) => {
+  const canvas = within(canvasElement);
+  const weeklyCycleElem = canvas.getByTestId('weekly_cycle') as HTMLInputElement;
+  await fireEvent.click(weeklyCycleElem);
+  const deliveryWeeklyCycleElem = canvas.getByTestId('delivery_weekly_cycle') as HTMLSelectElement;
+  await fireEvent.change(deliveryWeeklyCycleElem, {
+    target: { value: 'week3' },
+  });
+  await waitFor(async () => {
+    await expect(weeklyCycleElem).toBeChecked();
+    const selectedOptionElem = deliveryWeeklyCycleElem.querySelector('option:checked') as HTMLOptionElement;
+    await expect(selectedOptionElem.value).toBe('week3');
+  });
 };

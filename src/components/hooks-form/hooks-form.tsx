@@ -61,6 +61,7 @@ export const HooksForm = (props: Props) => {
               <InputRadio
                 name="delivery_cycle"
                 id="monthly_cycle"
+                dataTestId="monthly_cycle"
                 value="monthly"
                 label="月ごと"
                 currentValue={delivery_cycle}
@@ -71,12 +72,14 @@ export const HooksForm = (props: Props) => {
               <div>
                 <Select
                   name="delivery_monthly_cycle"
+                  dataTestId="delivery_monthly_cycle"
                   currentValue={delivery_monthly_cycle}
                   options={deliveryMonthlyCycleOptions}
                   dispatch={dispatch}
                 />
                 <Select
                   name="delivery_day"
+                  dataTestId="delivery_day"
                   currentValue={delivery_day}
                   options={deliveryDayOptions}
                   dispatch={dispatch}
@@ -89,6 +92,7 @@ export const HooksForm = (props: Props) => {
               <InputRadio
                 name="delivery_cycle"
                 id="weekly_cycle"
+                dataTestId="weekly_cycle"
                 value="weekly"
                 label="週ごと"
                 currentValue={delivery_cycle}
@@ -99,12 +103,14 @@ export const HooksForm = (props: Props) => {
               <div>
                 <Select
                   name="delivery_weekly_cycle"
+                  dataTestId="delivery_weekly_cycle"
                   currentValue={delivery_weekly_cycle}
                   options={deliveryWeeklyCycleOptions}
                   dispatch={dispatch}
                 />
                 <Select
                   name="delivery_day_of_week"
+                  dataTestId="delivery_day_of_week"
                   currentValue={delivery_day_of_week}
                   options={deliveryDayOfWeekOptions}
                   dispatch={dispatch}
