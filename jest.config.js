@@ -18,5 +18,6 @@ module.exports = {
     // esmが使われているパッケージを除いてIgnoreする
     `node_modules/(?!(${esmPackages.join('|')})/)`,
   ],
+  testEnvironment: 'jsdom',
   setupFiles: ['<rootDir>/setupFile.ts'],
 };
