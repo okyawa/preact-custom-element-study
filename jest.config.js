@@ -6,7 +6,7 @@ const esmPackages = [
 module.exports = {
   moduleFileExtensions: ['js', 'ts', 'json', 'jsx', 'tsx'],
   transform: {
-    '^.+\\.ts$': 'ts-jest',
+    '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
@@ -15,4 +15,5 @@ module.exports = {
     // esmが使われているパッケージを除いてIgnoreする
     `node_modules/(?!(${esmPackages.join('|')})/)`,
   ],
+  setupFiles: ['<rootDir>/setupFile.ts'],
 };
