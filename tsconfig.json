@@ -37,7 +37,10 @@
     // },
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like `./node_modules/@types`. */
-    "types": ["@types/jest"], /* Specify type package names to be included without being referenced in a source file. */
+    "types": [
+      "@types/jest",
+      "@testing-library/jest-dom"
+    ], /* Specify type package names to be included without being referenced in a source file. */
     // "types": [],                                      /* Specify type package names to be included without being referenced in a source file. */
     // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
     // "resolveJsonModule": true,                        /* Enable importing .json files */
