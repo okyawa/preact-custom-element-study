@@ -10,10 +10,6 @@ import * as Stories from './hooks-form.stories';
 
 const { Primary, Secondary } = composeStories(Stories);
 
-// TODO: JESTのES Module対応から続き
-// https://jestjs.io/docs/ecmascript-modules
-// https://jestjs.io/docs/getting-started#using-typescript
-
 describe('HooksForm' ,() => {
   test('Play story', async () =>{
     const container = render(Secondary());
