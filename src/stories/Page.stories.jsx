@@ -1,6 +1,6 @@
 /** @jsx h */
-import { h } from 'preact';
 import { within, userEvent } from '@storybook/testing-library';
+import { h } from 'preact';
 
 import { Page } from './Page';
 

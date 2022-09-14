@@ -43,7 +43,7 @@ export const HooksForm = (props: Props) => {
     }
     hostElement.dataset.formData = JSON.stringify(state);
     const triggerEvent = new Event('modified');
-// console.log('セレクタ', myRef.current.closest('hooks-form'));
+    // console.log('セレクタ', myRef.current.closest('hooks-form'));
     hostElement.dispatchEvent(triggerEvent);
     hostElement.dataset.valid = validateAll(state) ? 'true' : 'false';
   }, [state, dispatch]);
