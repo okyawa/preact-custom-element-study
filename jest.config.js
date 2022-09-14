@@ -10,6 +10,9 @@ module.exports = {
   },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    // '^react$': 'preact/compat',
+    // '^react-dom$': 'preact/compat',
+    // '^react-dom/test-utils$': 'preact/test-utils',
   },
   transformIgnorePatterns: [
     // esmが使われているパッケージを除いてIgnoreする
