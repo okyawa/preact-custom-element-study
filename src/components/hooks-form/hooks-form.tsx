@@ -45,17 +45,16 @@ export const HooksForm = ({
   const [state, dispatch] = useReducer(formStateReducer, initialFormStateValues);
   const { delivery_cycle, delivery_monthly_cycle, delivery_day, delivery_weekly_cycle, delivery_day_of_week } = state;
 
-  const deliveryCycleRadioEnabled = true;
-  // const deliveryCycleRadioEnabled = !monthlyDisabled && !weeklyDisabled;
-  // if (!monthlyDisabled || !weeklyDisabled) {
-  //   const deliveryCycleValue = !monthlyDisabled ? 'weekly' : 'monthly';
-  //   if (deliveryCycleValue !== state.delivery_cycle) {
-  //     dispatch({
-  //       field: 'delivery_cycle',
-  //       value: deliveryCycleValue,
-  //     });
-  //   }
-  // }
+  const deliveryCycleRadioEnabled = !monthlyDisabled && !weeklyDisabled;
+  if (!deliveryCycleRadioEnabled) {
+    const deliveryCycleValue = monthlyDisabled ? 'weekly' : 'monthly';
+    if (deliveryCycleValue !== state.delivery_cycle) {
+      dispatch({
+        field: 'delivery_cycle',
+        value: deliveryCycleValue,
+      });
+    }
+  }
 
   useEffect(() => {
     if (!wrapperRef.current) {
