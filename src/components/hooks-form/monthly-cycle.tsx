@@ -1,4 +1,5 @@
 import { Fragment, h } from 'preact';
+import { memo } from 'preact/compat';
 
 import { ActionType, OptionListType } from './lib/form-type';
 import { Select } from './ui/select';
@@ -11,7 +12,7 @@ type Props = {
   dispatch: (action: ActionType) => void;
 };
 
-export const MonthlyCycle = ({
+export const MonthlyCycle = memo(({
   deliveryMonthlyCycle,
   deliveryMonthlyCycleOptions,
   deliveryDay,
@@ -36,4 +37,4 @@ export const MonthlyCycle = ({
       />
     </div>
   </>;
-};
+});

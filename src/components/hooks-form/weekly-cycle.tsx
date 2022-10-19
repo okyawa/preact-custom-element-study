@@ -1,4 +1,5 @@
 import { Fragment, h } from 'preact';
+import { memo } from 'preact/compat';
 
 import { ActionType, OptionListType } from './lib/form-type';
 import { Select } from './ui/select';
@@ -11,13 +12,13 @@ type Props = {
   dispatch: (action: ActionType) => void;
 };
 
-export const WeeklyCycle = ({
+export const WeeklyCycle = memo(({
   deliveryWeeklyCycle,
   deliveryWeeklyCycleOptions,
   deliveryDayOfWeek,
   deliveryDayOfWeekOptions,
   dispatch,
-}: Props) => {
+}: Props): h.JSX.Element => {
   return <>
     <div>
       <Select
@@ -36,4 +37,4 @@ export const WeeklyCycle = ({
       />
     </div>
   </>;
-};
+});
