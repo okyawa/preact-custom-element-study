@@ -23,16 +23,21 @@ function validateAll(state: FormStateType): boolean {
 
 type Props = {
   name?: string;
-  perMonthDisabled?: boolean;
-  perWeekDisabled?: boolean;
+  monthly?: boolean;
+  monthlyDisabled?: boolean;
+  weeklyDisabled?: boolean;
 };
 
+const observedAttributes = [
+  'monthly-disabled',
+  'weekly-disabled',
+];
 const CUSTOM_ELEMENT_NAME = 'hooks-form';
 
 export const HooksForm = ({
   name,
-  perMonthDisabled,
-  perWeekDisabled,
+  monthlyDisabled,
+  weeklyDisabled,
 }: Props) => {
   // Webコンポーネントのインスタンスにアクセス
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -41,9 +46,9 @@ export const HooksForm = ({
   const { delivery_cycle, delivery_monthly_cycle, delivery_day, delivery_weekly_cycle, delivery_day_of_week } = state;
 
   const deliveryCycleRadioEnabled = true;
-  // const deliveryCycleRadioEnabled = !perMonthDisabled && !perMonthDisabled;
-  // if (!perMonthDisabled || !perMonthDisabled) {
-  //   const deliveryCycleValue = !perMonthDisabled ? 'weekly' : 'monthly';
+  // const deliveryCycleRadioEnabled = !monthlyDisabled && !weeklyDisabled;
+  // if (!monthlyDisabled || !weeklyDisabled) {
+  //   const deliveryCycleValue = !monthlyDisabled ? 'weekly' : 'monthly';
   //   if (deliveryCycleValue !== state.delivery_cycle) {
   //     dispatch({
   //       field: 'delivery_cycle',
@@ -75,7 +80,7 @@ export const HooksForm = ({
         )}
         <fieldset>
           <legend>お届けサイクル</legend>
-          {!perMonthDisabled && (
+          {!monthlyDisabled && (
             <div>
               {deliveryCycleRadioEnabled && (
                 <div>
@@ -101,7 +106,7 @@ export const HooksForm = ({
               )}
             </div>
           )}
-          {!perWeekDisabled && (
+          {!weeklyDisabled && (
             <div>
               {deliveryCycleRadioEnabled && (
                 <div>
@@ -133,4 +138,4 @@ export const HooksForm = ({
   );
 };
 
-register(HooksForm, CUSTOM_ELEMENT_NAME, [], { shadow: false });
+register(HooksForm, CUSTOM_ELEMENT_NAME, observedAttributes, { shadow: false });

@@ -11,10 +11,75 @@
 
     <h1>Preactで作ったコンポーネントをCustom Elementsとして使うサンプル</h1>
 
+    <h2>フォームの埋め込み検証 その4: Controlled Components 03</h2>
+    <h3>React Hooksを活用したフォーム: 選択値をPropsで渡す</h3>
+
+    <form id="hooks_form2">
+      <hooks-form
+        monthly-disabled=""
+        weekly-disabled=""
+      ></hooks-form>
+
+      <div>
+        <h3>Custom Elementsのフォーム外</h3>
+        <button>Submit</button>
+        <h4>入力値</h4>
+        <code id="hooks_form_value_debug"></code>
+        <h4>全バリデーション結果</h4>
+        <code id="hooks_form_validation_debug"></code>
+        <h4>FormData値</h4>
+        <code id="hooks_form_data_value_debug"></code>
+      </div>
+
+    </form>
+
+    <script>
+      /**
+       * Custom Elements内からのイベントを受け取り
+       * 
+       * Custom Elements自体にはイベントを付与できないため、
+       * Shadow DOMをOFFにした状態で、Custom Elements内の要素にカスタムイベントを付与し、
+       * カスタムイベントを付与した要素のdata属性にJSON.stringifyしたデータを格納し、
+       * こちら側で受け取り
+       */
+      const hooksFormCustomElem2 = document.querySelector('#hooks_form2 hooks-form');
+      hooksFormCustomElem2.addEventListener('modified', (event) => {
+        console.log('hooks-formから受け取ったデータ: ', JSON.parse(event.currentTarget.dataset.formData));
+        document.querySelector('#hooks_form_value_debug').textContent = event.currentTarget.dataset.formData;
+        document.querySelector('#hooks_form_validation_debug').textContent = event.currentTarget.dataset.valid;
+      }, false);
+      window.addEventListener('DOMContentLoaded', () => {
+        // hooksFormCustomElem2.setAttribute('', '');
+      });
+    </script>
+
+    <script>
+      /**
+       * form要素の中身あるCustom Elements内のinput要素やselect要素の値がFormDataとして取得できるかの検証
+       * →取得できる
+       */
+      const hooksForm2 = document.getElementById('hooks_form2');
+      hooksForm2.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(hooksForm2);
+        console.log(...formData.entries());
+        const data = {};
+        for (let value of formData.entries()) { 
+          data[value[0]] = value[1]; 
+        }
+        document.querySelector('#hooks_form_data_value_debug').textContent = JSON.stringify(data);
+      }, false);
+    </script>
+
+    <br />
+    <hr />
+    <br />
+
+
     <h2>フォームの埋め込み検証 その3: Controlled Components 02</h2>
     <h3>React Hooksを活用したフォーム</h3>
 
-    <form id="hooks_form">
+    <form id="hooks_form1">
       <hooks-form></hooks-form>
 
       <div>
@@ -39,8 +104,8 @@
        * カスタムイベントを付与した要素のdata属性にJSON.stringifyしたデータを格納し、
        * こちら側で受け取り
        */
-      const hooksFormCustomElem = document.querySelector('hooks-form');
-      hooksFormCustomElem.addEventListener('modified', (event) => {
+      const hooksFormCustomElem1 = document.querySelector('#hooks_form1 hooks-form');
+      hooksFormCustomElem1.addEventListener('modified', (event) => {
         console.log('hooks-formから受け取ったデータ: ', JSON.parse(event.currentTarget.dataset.formData));
         document.querySelector('#hooks_form_value_debug').textContent = event.currentTarget.dataset.formData;
         document.querySelector('#hooks_form_validation_debug').textContent = event.currentTarget.dataset.valid;
@@ -52,10 +117,10 @@
        * form要素の中身あるCustom Elements内のinput要素やselect要素の値がFormDataとして取得できるかの検証
        * →取得できる
        */
-      const hooksForm = document.getElementById('hooks_form');
-      hooksForm.addEventListener('submit', (event) => {
+      const hooksForm1 = document.getElementById('hooks_form1');
+      hooksForm1.addEventListener('submit', (event) => {
         event.preventDefault();
-        const formData = new FormData(hooksForm);
+        const formData = new FormData(hooksForm1);
         console.log(...formData.entries());
         const data = {};
         for (let value of formData.entries()) { 
