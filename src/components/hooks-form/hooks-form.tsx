@@ -4,14 +4,15 @@ import { useEffect, useReducer, useRef } from 'preact/hooks';
 
 import { formStateReducer } from './lib/form-state-reducer';
 import { FormStateType, initialFormStateValues } from './lib/form-type';
+import { MonthlyCycle } from './monthly-cycle';
 import { InputRadio } from './ui/input-radio';
-import { Select } from './ui/select';
 import {
   deliveryDayOfWeekOptions,
   deliveryDayOptions,
   deliveryMonthlyCycleOptions,
   deliveryWeeklyCycleOptions,
 } from './value-const';
+import { WeeklyCycle } from './weekly-cycle';
 
 function validateAll(state: FormStateType): boolean {
   if (state.delivery_cycle === '') {
@@ -39,16 +40,17 @@ export const HooksForm = ({
   const [state, dispatch] = useReducer(formStateReducer, initialFormStateValues);
   const { delivery_cycle, delivery_monthly_cycle, delivery_day, delivery_weekly_cycle, delivery_day_of_week } = state;
 
-  const deliveryCycleRadioEnabled = !perMonthDisabled && !perMonthDisabled;
-  if (!perMonthDisabled || !perMonthDisabled) {
-    const deliveryCycleValue = !perMonthDisabled ? 'weekly' : 'monthly';
-    if (deliveryCycleValue !== state.delivery_cycle) {
-      dispatch({
-        field: 'delivery_cycle',
-        value: deliveryCycleValue,
-      });
-    }
-  }
+  const deliveryCycleRadioEnabled = true;
+  // const deliveryCycleRadioEnabled = !perMonthDisabled && !perMonthDisabled;
+  // if (!perMonthDisabled || !perMonthDisabled) {
+  //   const deliveryCycleValue = !perMonthDisabled ? 'weekly' : 'monthly';
+  //   if (deliveryCycleValue !== state.delivery_cycle) {
+  //     dispatch({
+  //       field: 'delivery_cycle',
+  //       value: deliveryCycleValue,
+  //     });
+  //   }
+  // }
 
   useEffect(() => {
     if (!wrapperRef.current) {
@@ -89,22 +91,13 @@ export const HooksForm = ({
                 </div>
               )}
               {delivery_cycle === 'monthly' && (
-                <div>
-                  <Select
-                    name="delivery_monthly_cycle"
-                    dataTestId="delivery_monthly_cycle"
-                    currentValue={delivery_monthly_cycle}
-                    options={deliveryMonthlyCycleOptions}
-                    dispatch={dispatch}
-                  />
-                  <Select
-                    name="delivery_day"
-                    dataTestId="delivery_day"
-                    currentValue={delivery_day}
-                    options={deliveryDayOptions}
-                    dispatch={dispatch}
-                  />
-                </div>
+                <MonthlyCycle
+                  deliveryMonthlyCycle={delivery_monthly_cycle}
+                  deliveryMonthlyCycleOptions={deliveryMonthlyCycleOptions}
+                  deliveryDay={delivery_day}
+                  deliveryDayOptions={deliveryDayOptions}
+                  dispatch={dispatch}
+                ></MonthlyCycle>
               )}
             </div>
           )}
@@ -124,22 +117,13 @@ export const HooksForm = ({
                 </div>
               )}
               {delivery_cycle === 'weekly' && (
-                <div>
-                  <Select
-                    name="delivery_weekly_cycle"
-                    dataTestId="delivery_weekly_cycle"
-                    currentValue={delivery_weekly_cycle}
-                    options={deliveryWeeklyCycleOptions}
-                    dispatch={dispatch}
-                  />
-                  <Select
-                    name="delivery_day_of_week"
-                    dataTestId="delivery_day_of_week"
-                    currentValue={delivery_day_of_week}
-                    options={deliveryDayOfWeekOptions}
-                    dispatch={dispatch}
-                  />
-                </div>
+                <WeeklyCycle
+                  deliveryWeeklyCycle={delivery_weekly_cycle}
+                  deliveryWeeklyCycleOptions={deliveryWeeklyCycleOptions}
+                  deliveryDayOfWeek={delivery_day_of_week}
+                  deliveryDayOfWeekOptions={deliveryDayOfWeekOptions}
+                  dispatch={dispatch}
+                ></WeeklyCycle>
               )}
             </div>
           )}
