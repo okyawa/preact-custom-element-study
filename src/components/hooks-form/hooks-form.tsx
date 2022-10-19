@@ -1,6 +1,7 @@
 import { Fragment, h } from 'preact';
 import register from 'preact-custom-element';
 import { useEffect, useReducer, useRef } from 'preact/hooks';
+import { convertStrToBool } from './lib/convert';
 
 import { formStateReducer } from './lib/form-state-reducer';
 import { FormStateType, initialFormStateValues } from './lib/form-type';
@@ -45,9 +46,11 @@ export const HooksForm = ({
   const [state, dispatch] = useReducer(formStateReducer, initialFormStateValues);
   const { delivery_cycle, delivery_monthly_cycle, delivery_day, delivery_weekly_cycle, delivery_day_of_week } = state;
 
-  const deliveryCycleRadioEnabled = !monthlyDisabled && !weeklyDisabled;
+  const isMonthlyDisabled = convertStrToBool(monthlyDisabled);
+  const isWeeklyDisabled = convertStrToBool(weeklyDisabled);
+  const deliveryCycleRadioEnabled = !isMonthlyDisabled && !isWeeklyDisabled;
   if (!deliveryCycleRadioEnabled) {
-    const deliveryCycleValue = monthlyDisabled ? 'weekly' : 'monthly';
+    const deliveryCycleValue = isMonthlyDisabled ? 'weekly' : 'monthly';
     if (deliveryCycleValue !== state.delivery_cycle) {
       dispatch({
         field: 'delivery_cycle',
@@ -79,7 +82,7 @@ export const HooksForm = ({
         )}
         <fieldset>
           <legend>お届けサイクル</legend>
-          {!monthlyDisabled && (
+          {!isMonthlyDisabled && (
             <div>
               {deliveryCycleRadioEnabled && (
                 <div>
@@ -105,7 +108,7 @@ export const HooksForm = ({
               )}
             </div>
           )}
-          {!weeklyDisabled && (
+          {!isWeeklyDisabled && (
             <div>
               {deliveryCycleRadioEnabled && (
                 <div>
