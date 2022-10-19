@@ -1,8 +1,8 @@
 import { Fragment, h } from 'preact';
 import register from 'preact-custom-element';
 import { useEffect, useReducer, useRef } from 'preact/hooks';
-import { convertStrToBool } from './lib/convert';
 
+import { convertStrToBool } from './lib/convert';
 import { formStateReducer } from './lib/form-state-reducer';
 import { FormStateType, initialFormStateValues } from './lib/form-type';
 import { MonthlyCycle } from './monthly-cycle';
