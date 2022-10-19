@@ -13,9 +13,9 @@ export type FormStateType = {
 
 export const initialFormStateValues: FormStateType = {
   delivery_cycle: '',
-  delivery_monthly_cycle: 'month1',
-  delivery_day: 'day1',
-  delivery_weekly_cycle: 'week2',
+  delivery_monthly_cycle: 'one_month',
+  delivery_day: 'day_1',
+  delivery_weekly_cycle: 'per_two_week',
   delivery_day_of_week: 'monday',
 };
 

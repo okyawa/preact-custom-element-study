@@ -8,27 +8,28 @@ export const deliveryCycleCaseOptions: SelectionItemsType = {
 };
 
 export const deliveryMonthlyCycleOptions: SelectionItemsType = {
-  month1: '1ヶ月ごと',
-  month2: '2ヶ月ごと',
-  month3: '3ヶ月ごと',
-  month4: '4ヶ月ごと',
-  month5: '5ヶ月ごと',
-  month6: '6ヶ月ごと',
+  one_month: '1ヶ月ごと',
+  two_month: '2ヶ月ごと',
+  three_month: '3ヶ月ごと',
+  four_month: '4ヶ月ごと',
+  five_month: '5ヶ月ごと',
+  six_month: '6ヶ月ごと',
 };
 
 export const deliveryDayOptions: SelectionItemsType = {
-  day1: '毎月1日',
-  day5: '毎月5日',
-  day10: '毎月10日',
-  day15: '毎月15日',
-  day20: '毎月20日',
-  day25: '毎月25日',
+  day_1: '毎月1日',
+  day_5: '毎月5日',
+  day_10: '毎月10日',
+  day_15: '毎月15日',
+  day_20: '毎月20日',
+  day_25: '毎月25日',
   end_of_month: '毎月月末',
 };
 
 export const deliveryWeeklyCycleOptions: SelectionItemsType = {
-  week2: '2週毎',
-  week3: '3週毎',
+  per_two_week: '2週毎',
+  per_three_week: '3週毎',
+  per_four_week: '4週毎',
 };
 
 export const deliveryDayOfWeekOptions: SelectionItemsType = {
