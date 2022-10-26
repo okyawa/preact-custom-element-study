@@ -1,14 +1,14 @@
 import { Fragment, h } from 'preact';
 import { memo } from 'preact/compat';
 
-import { ActionType, OptionListType } from './lib/form-type';
+import { ActionType, OptionItemType } from './lib/form-type';
 import { Select } from './ui/select';
 
 type Props = {
   deliveryMonthlyCycle: string;
-  deliveryMonthlyCycleOptions: OptionListType;
+  deliveryMonthlyCycleOptions: OptionItemType[];
   deliveryDay: string;
-  deliveryDayOptions: OptionListType;
+  deliveryDayOptions: OptionItemType[];
   dispatch: (action: ActionType) => void;
 };
 

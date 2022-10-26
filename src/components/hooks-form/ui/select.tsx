@@ -1,13 +1,13 @@
 // eslint-disable-next-line import/named
 import { Fragment, h, JSX } from 'preact';
 
-import { ActionType, HtmlAttrListType, OptionListType } from '../lib/form-type';
+import { ActionType, HtmlAttrListType, OptionItemType } from '../lib/form-type';
 
 type Props = {
   name: string;
   dataTestId?: string;
   currentValue: string;
-  options: OptionListType;
+  options: OptionItemType[];
   attributes?: HtmlAttrListType;
   dispatch: (action: ActionType) => void;
 };
@@ -20,9 +20,9 @@ export const Select = ({ options, name, dataTestId, currentValue: value, dispatc
   return (
     <Fragment>
       <select name={name} onChange={onChange} value={value} data-testid={dataTestId}>
-        {Object.keys(options).map((key) => (
-          <option key={key} value={key}>
-            {options[key]}
+        {options.map((item) => (
+          <option key={item.value} value={item.value}>
+            {item.label}
           </option>
         ))}
       </select>

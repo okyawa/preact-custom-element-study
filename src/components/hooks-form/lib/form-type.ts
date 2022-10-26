@@ -19,8 +19,9 @@ export const initialFormStateValues: FormStateType = {
   delivery_day_of_week: 'monday',
 };
 
-export type OptionListType = {
-  [key: string]: string;
+export type OptionItemType = {
+  value: string;
+  label: string;
 };
 
 export type HtmlAttrListType = {
