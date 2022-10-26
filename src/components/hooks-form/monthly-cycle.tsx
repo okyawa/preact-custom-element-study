@@ -19,7 +19,7 @@ export const MonthlyCycle = memo(({
   deliveryDayOptions,
   dispatch,
 }: Props) => {
-  return <>
+  return <Fragment>
     <div>
       <Select
         name="delivery_monthly_cycle"
@@ -36,5 +36,5 @@ export const MonthlyCycle = memo(({
         dispatch={dispatch}
       />
     </div>
-  </>;
+  </Fragment>;
 });

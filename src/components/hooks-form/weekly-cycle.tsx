@@ -19,7 +19,7 @@ export const WeeklyCycle = memo(({
   deliveryDayOfWeekOptions,
   dispatch,
 }: Props): h.JSX.Element => {
-  return <>
+  return <Fragment>
     <div>
       <Select
         name="delivery_weekly_cycle"
@@ -36,5 +36,5 @@ export const WeeklyCycle = memo(({
         dispatch={dispatch}
       />
     </div>
-  </>;
+  </Fragment>;
 });
