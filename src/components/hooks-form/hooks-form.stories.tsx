@@ -60,11 +60,11 @@ Secondary.play = async ( { canvasElement } ) => {
   await fireEvent.click(weeklyCycleElem);
   const deliveryWeeklyCycleElem = canvas.getByTestId('delivery_weekly_cycle') as HTMLSelectElement;
   await fireEvent.change(deliveryWeeklyCycleElem, {
-    target: { value: 'week3' },
+    target: { value: 'per_three_week' },
   });
   await waitFor(async () => {
     await expect(weeklyCycleElem).toBeChecked();
     const selectedOptionElem = deliveryWeeklyCycleElem.querySelector('option:checked') as HTMLOptionElement;
-    await expect(selectedOptionElem.value).toBe('week3');
+    await expect(selectedOptionElem.value).toBe('per_three_week');
   });
 };
