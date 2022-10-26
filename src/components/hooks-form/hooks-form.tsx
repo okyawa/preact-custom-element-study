@@ -4,7 +4,7 @@ import { useEffect, useReducer, useRef } from 'preact/hooks';
 
 import { convertStrToBool } from './lib/convert';
 import { formStateReducer } from './lib/form-state-reducer';
-import { FormStateType, initialFormStateValues } from './lib/form-type';
+import { FormStateType, initialFormStateValues, OptionItemType } from './lib/form-type';
 import { MonthlyCycle } from './monthly-cycle';
 import { InputRadio } from './ui/input-radio';
 import {
@@ -24,14 +24,19 @@ function validateAll(state: FormStateType): boolean {
 
 type Props = {
   name?: string;
-  monthly?: boolean;
   monthlyDisabled?: boolean;
   weeklyDisabled?: boolean;
+  cycleMonth?: string;
+  // cycleDayOfWeek?: OptionItemType[];
+  // cycleDay?: OptionItemType[];
+  // cyclePerWeek?: OptionItemType[];
+  // cycleWeek?: OptionItemType[];
 };
 
 const observedAttributes = [
   'monthly-disabled',
   'weekly-disabled',
+  'cycle-month',
 ];
 const CUSTOM_ELEMENT_NAME = 'hooks-form';
 
@@ -39,7 +44,18 @@ export const HooksForm = ({
   name,
   monthlyDisabled,
   weeklyDisabled,
+  cycleMonth,
 }: Props) => {
+  // 検証中
+  const encodedCycleMonth = cycleMonth ? JSON.parse(cycleMonth) as OptionItemType[] : null;
+console.log('cycleMonth ============ ', encodedCycleMonth);
+  const defaultFormStateValues = encodedCycleMonth ? {...initialFormStateValues, delivery_monthly_cycle: encodedCycleMonth[0].value} : initialFormStateValues;
+console.log(encodedCycleMonth ? encodedCycleMonth[0] : null);
+  // TODO: ↑onload後にsetAttributeしているため、初回はnullになってしまう。
+  // 更新時、初期値を変えるのではなく、値の更新を走らせる必要がありそう
+  // 複数回更新が走るのも微妙なので、全ての選択項目を1つにまとめた方が良さそう
+  // 選択肢のパラメータが飛んできてから初期化の実行とか
+
   // Webコンポーネントのインスタンスにアクセス
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -100,7 +116,7 @@ export const HooksForm = ({
               {delivery_cycle === 'monthly' && (
                 <MonthlyCycle
                   deliveryMonthlyCycle={delivery_monthly_cycle}
-                  deliveryMonthlyCycleOptions={deliveryMonthlyCycleOptions}
+                  deliveryMonthlyCycleOptions={encodedCycleMonth ?? deliveryMonthlyCycleOptions}
                   deliveryDay={delivery_day}
                   deliveryDayOptions={deliveryDayOptions}
                   dispatch={dispatch}

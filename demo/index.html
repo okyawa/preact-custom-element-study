@@ -49,7 +49,11 @@
         document.querySelector('#hooks_form_validation_debug').textContent = event.currentTarget.dataset.valid;
       }, false);
       window.addEventListener('DOMContentLoaded', () => {
-        // hooksFormCustomElem2.setAttribute('', '');
+        hooksFormCustomElem2.setAttribute('cycle-month', JSON.stringify([
+        { value: 'three_month', label: '3ヶ月ごと' },
+        { value: 'four_month', label: '4ヶ月ごと' },
+        { value: 'five_month', label: '5ヶ月ごと' },
+        ]));
       });
     </script>
 
