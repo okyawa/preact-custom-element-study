@@ -7,6 +7,7 @@ export type SelectionItemsType = OptionItemType[];
 //   { value: 'weekly', label: '週ごと' },
 // ];
 
+/*
 export const deliveryMonthlyCycleOptions: SelectionItemsType = [
   { value: 'one_month', label: '1ヶ月ごと' },
   { value: 'two_month', label: '2ヶ月ごと' },
@@ -41,3 +42,4 @@ export const deliveryDayOfWeekOptions: SelectionItemsType = [
   { value: 'friday', label: '金曜日' },
   { value: 'saturday', label: '土曜日' },
 ];
+*/

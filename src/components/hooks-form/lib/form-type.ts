@@ -11,6 +11,7 @@ export type FormStateType = {
   delivery_day_of_week: string;
 };
 
+/*
 export const initialFormStateValues: FormStateType = {
   delivery_cycle: '',
   delivery_monthly_cycle: 'one_month',
@@ -18,6 +19,7 @@ export const initialFormStateValues: FormStateType = {
   delivery_weekly_cycle: 'per_two_week',
   delivery_day_of_week: 'monday',
 };
+*/
 
 export type OptionItemType = {
   value: string;
@@ -26,4 +28,16 @@ export type OptionItemType = {
 
 export type HtmlAttrListType = {
   [key: string]: string;
+};
+
+export type FormOption = {
+  monthlyDisabled: boolean;
+  weeklyDisabled: boolean;
+  firstDeliveryDate: number,
+  cycleMonth: OptionItemType[];
+  cycleNthWeek: OptionItemType[];
+  cycleMonthDayOfWeek: OptionItemType[];
+  cycleDay: OptionItemType[];
+  cycleWeek: OptionItemType[];
+  cycleWeekDayOfWeek:OptionItemType[];
 };
