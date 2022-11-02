@@ -40,4 +40,5 @@ export type FormOption = {
   cycleDay: OptionItemType[];
   cycleWeek: OptionItemType[];
   cycleWeekDayOfWeek:OptionItemType[];
+  defaults?: FormStateType;
 };

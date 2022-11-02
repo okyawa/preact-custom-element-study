@@ -30,23 +30,21 @@ export const HooksForm = ({
   name,
   formOption,
 }: Props) => {
-  // 検証中
 console.log('Raw formOption ============ ', formOption);
   const encodedFormOption = formOption ? JSON.parse(formOption) as FormOption : null;
 console.log('Encoded formOption ============ ', encodedFormOption);
-  // const defaultFormStateValues = encodedFormOption ? {...initialFormStateValues, delivery_monthly_cycle: encodedFormOption.cycleMonth[0].value} : initialFormStateValues;
-console.log(encodedFormOption ? encodedFormOption.cycleMonth[0] : null);
   if (encodedFormOption === null) {
     // 選択肢のパラメータを受け取るまで
     return <Fragment>読み込み中...</Fragment>;
   }
 
+  // 選択肢の初期値
   const defaultFormStateValues: FormStateType = {
-    delivery_cycle: '',
-    delivery_monthly_cycle: encodedFormOption.cycleMonth[0].value,
-    delivery_day: encodedFormOption.cycleDay[0].value,
-    delivery_weekly_cycle: encodedFormOption.cycleWeek[0].value,
-    delivery_day_of_week: encodedFormOption.cycleWeekDayOfWeek[0].value,
+    delivery_cycle: encodedFormOption?.defaults?.delivery_cycle ?? '',
+    delivery_monthly_cycle: encodedFormOption?.defaults?.delivery_monthly_cycle ?? encodedFormOption.cycleMonth[0].value,
+    delivery_day: encodedFormOption?.defaults?.delivery_day ?? encodedFormOption.cycleDay[0].value,
+    delivery_weekly_cycle: encodedFormOption?.defaults?.delivery_weekly_cycle ?? encodedFormOption.cycleWeek[0].value,
+    delivery_day_of_week: encodedFormOption?.defaults?.delivery_day_of_week ?? encodedFormOption.cycleWeekDayOfWeek[0].value,
   };
 
   // Webコンポーネントのインスタンスにアクセス
