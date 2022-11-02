@@ -51,15 +51,16 @@ export const HooksForm = ({
 console.log('cycleMonth ============ ', encodedCycleMonth);
   const defaultFormStateValues = encodedCycleMonth ? {...initialFormStateValues, delivery_monthly_cycle: encodedCycleMonth[0].value} : initialFormStateValues;
 console.log(encodedCycleMonth ? encodedCycleMonth[0] : null);
-  // TODO: ↑onload後にsetAttributeしているため、初回はnullになってしまう。
-  // 更新時、初期値を変えるのではなく、値の更新を走らせる必要がありそう
-  // 複数回更新が走るのも微妙なので、全ての選択項目を1つにまとめた方が良さそう
-  // 選択肢のパラメータが飛んできてから初期化の実行とか
+
+  if (encodedCycleMonth === null) {
+    // 選択肢のパラメータを受け取るまで
+    return <Fragment>読み込み中...</Fragment>;
+  }
 
   // Webコンポーネントのインスタンスにアクセス
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const [state, dispatch] = useReducer(formStateReducer, initialFormStateValues);
+  const [state, dispatch] = useReducer(formStateReducer, defaultFormStateValues);
   const { delivery_cycle, delivery_monthly_cycle, delivery_day, delivery_weekly_cycle, delivery_day_of_week } = state;
 
   const isMonthlyDisabled = convertStrToBool(monthlyDisabled);
