@@ -1,6 +1,7 @@
 import { h } from 'preact';
 
 import { HooksForm } from './hooks-form';
+import { formOptionObject } from './lib/form-option-value';
 
 // export default { component: HooksForm };
 
@@ -25,9 +26,11 @@ const Template = (args) => <HooksForm {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
   name: 'Tom',
+  formOption: JSON.stringify(formOptionObject),
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
   name: 'Nancy',
+  formOption: JSON.stringify(formOptionObject),
 };
