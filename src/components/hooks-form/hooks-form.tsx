@@ -1,5 +1,4 @@
 import { Fragment, h } from 'preact';
-import register from 'preact-custom-element';
 import { useEffect, useReducer, useRef } from 'preact/hooks';
 
 import { convertStrToBool } from './lib/convert';
@@ -16,15 +15,16 @@ function validateAll(state: FormStateType): boolean {
   return true;
 }
 
+export const CUSTOM_ELEMENT_NAME = 'hooks-form';
+
+export const observedAttributes = [
+  'form-option',
+];
+
 type Props = {
   formOption?: string;
   name?: string;
 };
-
-const observedAttributes = [
-  'form-option',
-];
-const CUSTOM_ELEMENT_NAME = 'hooks-form';
 
 export const HooksForm = ({
   name,
@@ -147,5 +147,3 @@ export const HooksForm = ({
     </Fragment>
   );
 };
-
-register(HooksForm, CUSTOM_ELEMENT_NAME, observedAttributes, { shadow: false });

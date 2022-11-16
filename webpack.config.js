@@ -9,6 +9,7 @@ module.exports = {
   entry: {
     'video-hls': './src/index.tsx',
     'product-fom': './src/product-fom.tsx',
+    'index-form': './src/index-form.tsx',
   },
   output: {
     path: path.resolve(__dirname, './dist'),
