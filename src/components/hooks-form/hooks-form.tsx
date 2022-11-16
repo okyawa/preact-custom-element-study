@@ -30,9 +30,9 @@ export const HooksForm = ({
   name,
   formOption,
 }: Props) => {
-console.log('Raw formOption ============ ', formOption);
+// console.log('Raw formOption ============ ', formOption);
   const encodedFormOption = formOption ? JSON.parse(formOption) as FormOption : null;
-console.log('Encoded formOption ============ ', encodedFormOption);
+// console.log('Encoded formOption ============ ', encodedFormOption);
   if (encodedFormOption === null) {
     // 選択肢のパラメータを受け取るまで
     return <Fragment>読み込み中...</Fragment>;
@@ -74,11 +74,12 @@ console.log('Encoded formOption ============ ', encodedFormOption);
     if (hostElement === null) {
       return;
     }
-    hostElement.dataset.formData = JSON.stringify(state);
-    const triggerEvent = new Event('modified');
-    // console.log('セレクタ', myRef.current.closest('hooks-form'));
+    const eventDetail = {
+      state,
+      valid: validateAll(state) ? 'true' : 'false',
+    };
+    const triggerEvent = new CustomEvent('modified', { detail: eventDetail });
     hostElement.dispatchEvent(triggerEvent);
-    hostElement.dataset.valid = validateAll(state) ? 'true' : 'false';
   }, [state, dispatch]);
 
   return (

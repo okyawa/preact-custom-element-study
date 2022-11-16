@@ -41,9 +41,9 @@
        */
       const hooksFormCustomElem2 = document.querySelector('#hooks_form2 hooks-form');
       hooksFormCustomElem2.addEventListener('modified', (event) => {
-        console.log('hooks-formから受け取ったデータ: ', JSON.parse(event.currentTarget.dataset.formData));
-        document.querySelector('#hooks_form_value_debug').textContent = event.currentTarget.dataset.formData;
-        document.querySelector('#hooks_form_validation_debug').textContent = event.currentTarget.dataset.valid;
+        console.log('hooks-formのevent.detailから取得した値', event.detail);
+        document.querySelector('#hooks_form_value_debug').textContent = JSON.stringify(event.detail.state);
+        document.querySelector('#hooks_form_validation_debug').textContent = JSON.stringify(event.detail.valid);
       }, false);
       window.addEventListener('DOMContentLoaded', () => {
         hooksFormCustomElem2.setAttribute('form-option', JSON.stringify({
@@ -160,9 +160,9 @@
        */
       const hooksFormCustomElem1 = document.querySelector('#hooks_form1 hooks-form');
       hooksFormCustomElem1.addEventListener('modified', (event) => {
-        console.log('hooks-formから受け取ったデータ: ', JSON.parse(event.currentTarget.dataset.formData));
-        document.querySelector('#hooks_form_value_debug').textContent = event.currentTarget.dataset.formData;
-        document.querySelector('#hooks_form_validation_debug').textContent = event.currentTarget.dataset.valid;
+        console.log('hooks-formのevent.detailから取得した値', event.detail);
+        document.querySelector('#hooks_form_value_debug').textContent = JSON.stringify(event.detail.state);
+        document.querySelector('#hooks_form_validation_debug').textContent = JSON.stringify(event.detail.valid);
       }, false);
       window.addEventListener('DOMContentLoaded', () => {
         hooksFormCustomElem1.setAttribute('form-option', JSON.stringify({
