@@ -11,6 +11,7 @@
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "test-storybook": "test-storybook",
     "test": "jest"
   },
   "dependencies": {
