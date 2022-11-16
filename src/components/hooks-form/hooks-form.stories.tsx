@@ -17,16 +17,20 @@ import { formOptionObject } from './lib/form-option-value';
 // export const Index2: sb.StoryFn<typeof HooksForm> = () => <HooksForm />;
 
 /*
-↓特に効果なし
+//↓特に効果なし
 Index.bind({}).args = {
-  title: 'お名前',
+  name: 'Jim',
+  formOption: JSON.stringify(formOptionObject),
 };
 */
 
 /*
 // ↓の形式だと "TypeError: Cannot read properties of undefined (reading 'length')" となる
 export const Index: sb.StoryObj<typeof HooksForm> = {
-  args: { },
+  args: {
+    name: 'Jim',
+    formOption: JSON.stringify(formOptionObject),
+  },
 };
 */
 
