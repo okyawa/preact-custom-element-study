@@ -51,4 +51,8 @@ module.exports = {
       template: './demo/index.html',
     }),
   ],
+  // watch対象から node_modules/ 以下を除外
+  watchOptions: {
+    ignored: '/node_modules/',
+  },
 };
